@@ -4,40 +4,19 @@ author: Christophe Bontemps - SIAP^[*This document uses teaching materials devel
   by Joseph Crispell & Nathan Begbie (ONS-UK)* ]
 date: "`r format(Sys.Date(), '%d %b %Y')`"
 output:
-  slidy_presentation: default
-  beamer_presentation: default
   ioslides_presentation:
     logo: images/logos/SIAP_logo_2020_1800.png
     widescreen: yes
     css: css/custom.css
+  beamer_presentation: default
+  slidy_presentation: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-<!-- Extra custom code to add "OFFICIAL" into the header -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-      $('slide:not(.title-slide, .backdrop, .segue)').append('<header label=\"OFFICIAL\"></header>');    
-    })
-</script>
-
-<style>
-  header:after {
-    content: attr(label);
-    font-size: 12pt;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    line-height: 1.9;
-  }
-</style>
-
-<!-- END custom code block for header -->
 
 <!-- Extra custom code for footnotes - taken from https://stackoverflow.com/questions/42690955/how-to-insert-footnotes-in-ioslides-presentations-using-rmarkdown -->
 
@@ -49,12 +28,12 @@ Note that you can use presenter mode by adding "presentme=true" to presentation 
 More information on "ioslides" available here: https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html.
 -->
 
-## What is a Analytical Pipeline? The ideal scenario
+## Usual practice: Theory *vs* reality
 
 <br><br>
 
 <p class="aligncenter">
-    <img src="images/TraditionalAnalysis-Aim.png" width="85%" height="auto" align="center">
+    <img src="images/RAP1-1-WhatisRAP.gif" width="90%" height="auto" align="center">
 </p>
 
 <div class="notes">
@@ -67,15 +46,22 @@ More information on "ioslides" available here: https://bookdown.org/yihui/rmarkd
   3. We then copy and paste the formatted table and chart into a word document and add some text and formatting to create the final report
 </div>
 
-## What is a Analytical Pipeline? The reality...
+## Usual practice: In the end
 
 <p class="aligncenter">
-    <img src="images/TraditionalAnalysis-Reality.png" width="85%" height="auto" align="center">
+    <img src="images/RAP1-1-WhatisRAP-2.gif" width="90%" height="auto" align="center">
 </p>
 
 <div class="notes">
   In reality though, our ideal analytical pipeline can quickly become a complicated tangle of multiple file and data versions, programs, emails and final reports.
 </div>
+
+
+
+```{r exit}
+knitr::knit_exit()
+```
+
 
 ## What are the issues?
 
