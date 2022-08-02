@@ -1,5 +1,5 @@
 ---
-title: "Prerequisite"
+title: "Setting up" 
 author: Christophe Bontemps - SIAP
 date: '2022-08-02'
 output:
@@ -18,11 +18,12 @@ tutorial_options(exercise.timelimit = 60)
 # From https://rstudio.github.io/learnr/
 ```
 
-## Welcome to ![](images/logos/SIAP_logo_2020_1800.png){width=10%}
 
+![](images/logos/SIAP_logo_2020_1800.png){width=15%}
 
-This is an interactive tutorial^[*This document uses materials developed
-by *Garrick Aden-Buie, Barret Schloerke, JJ Allaire*, the creators of the [https://rstudio.github.io/learnr/](learner) package] that should help you verify that you and  your computer are ready to use the materials developed for this course. 
+## Welcome 
+
+This is an interactive tutorial that should help you verify that you and  your computer are ready to use the materials developed for this course.^[This document uses materials developed by *Garrick Aden-Buie, Barret Schloerke & JJ Allaire* , the creators of the [learner](https://rstudio.github.io/learnr/) package]  
 
 ### Learning Objectives
 At the end of this tutorial you should be able to:  
@@ -31,7 +32,7 @@ At the end of this tutorial you should be able to:
 * Install the RStudio IDE
 * Install the `tidyverse` R package
 
-You can skip this tutorial if you've already done these things.
+You can skip this tutorial if you've already done these things, by it may be safer to check (click `continue`).
 
 ### Is this tutorial for you?
 
@@ -39,29 +40,35 @@ Do you need to work through the tutorial? Take the quiz below to find out.
 
 
 ```{r quiz1, echo = FALSE}
-question("Check all that you have NOT done:",
-  answer("installed R on my computer", message = "* Install R"),
-  answer("installed the RStudio IDE", message = "* Install RStudio IDE"),
-  answer("installed the tidyverse R package", message = "* Install Packages"),
-  answer("None of the above. I've done them all.", correct = TRUE, message = "You can skip this tutorial!"),
+question("Check all that is TRUE:",
+  answer("R is NOT installed on my computer", message = "* Install R"),
+  answer("RStudio is NOT installed on my computer", message = "* Install RStudio IDE"),
+  answer("The **tidyverse** package is not installed on my computer", message = "* Install Packages"),
+  answer("I've done them all.", correct = TRUE, message = "You can skip this tutorial! (or still click on *Continue* if you want!)"),
   type = "multiple",
-  incorrect = "This tutorial is here to help! To get set up read:"
+  incorrect = "Don't worry, this tutorial is here to help!  To get set up follow the tutorial and follow (at least):"
 )
 ```
 
+>*We highly recommend that you follow the order of the items proposed in this tutorial*!
+
 ## Install R
+*R* is the core piece of software that we need and we certainly wouldn't be able to do anything without a proper and recent version installed on our computers. 
+
+> If our computer was a plane, we may think of R as the engine
 
 ### How to install R
+The best way is to follow the instructions in this video (*1 min 30s*)
 
 ![](https://vimeo.com/203516510)
 
 ### Test your knowledge
 
 ```{r quiz2, echo=FALSE}
-quiz(caption = "Quiz - Install R",
+quiz(caption = "Quiz - About R",
   question("Is R free to download and use?",
     answer("Yes!", correct = TRUE, message = "R is free _and_ open source, which means that anyone can read, use, and copy the source code of the R language."),
-    answer("No.")
+    answer("No.",  message = "R is indeed free _AND_ open source, which means that anyone can read, use, and copy the source code of the R language.")
   ),
   question("Where do you download R?",
     answer("www.rstudio.com/download"),
@@ -80,10 +87,15 @@ quiz(caption = "Quiz - Install R",
 ```
 
 ## Install RStudio
+RStudio is an Integrated Development Environment (IDE) for R. It means that RStudio helps you write and work with R in a very intuitive and simple way.  
+
+> If our computer was a plane, we may think of RStudio as the cockpit  
 
 ### How to install RStudio
 
-RStudio is an Integrated Development Environment for R. What does that mean? Well, if you think of R as a language, which it is, you can think of RStudio as a program that helps you write and work in the language. RStudio makes programming in R much easier and I suggest that you use it!
+ RStudio makes editing, programming and visualizing in R much easier and we highly recommend that you install it and use it.  
+ 
+ For that, follow the instructions in this video (*50 sec*)
 
 ![](https://vimeo.com/203516968)
 
@@ -92,15 +104,15 @@ RStudio is an Integrated Development Environment for R. What does that mean? Wel
 ```{r quiz3, echo=FALSE}
 quiz(caption = "Quiz - Install RStudio",
   question("What is the RStudio IDE?",
-    answer("An application that makes it easier to use R.", correct = TRUE, message = "RStudio organizes your workspace and makes it easier to write, use, debug, and save R code. I highly recommend it and will rely on the RStudio IDE in several tutorials."),
+    answer("An application that makes it easier to use R.", correct = TRUE, message = "RStudio organizes your workspace and makes it easier to write, use, debug, and save R code. We highly recommend it and we will rely on the RStudio IDE in this course."),
     answer("An application that let's you use R without writing any code", message = "And thank goodness! Code provides a reproducible record of your work, which is essential for data science."),
-    answer("A spreadsheet program like Microsoft Excel."),
-    answer("Another name for R", message = "R and RStudio are two separate things. R is a language, like English. Think of RStudio as a program that helps you use the language, kind of like how a word processing program helps you write in English."),
+    answer("A spreadsheet program like Microsoft Excel.", message = "No. Although we can visualise data in RStudio almost as in Microsoft Excel, RStudio is much more than that!"),
+    answer("Another name for R", message = "No. R and RStudio are two separate things: R is the real data and code processing *engine* while RStudio is the environment that facilitate your life to provide instrcutions, like a *cokpit*. "),
     allow_retry = TRUE
   ),
   question("Is the RStudio IDE free to download and use?",
-    answer("Yes!", correct = TRUE, message = "Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features in these tutorials."),
-    answer("No.", message = "Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features in these tutorials.")
+    answer("Yes!", correct = TRUE, message = "Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features."),
+    answer("No.", message = "Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features.")
   ),
   question("Where do you download RStudio?",
     answer("www.rstudio.com/download", correct = TRUE, message = "For these tutorials, download and install the RStudio Desktop Open Source License."),
@@ -110,15 +122,19 @@ quiz(caption = "Quiz - Install RStudio",
     allow_retry = TRUE
   ),
   question("Do you need to install R if you already have RStudio?",
-    answer("Yes.", correct = TRUE),
-    answer("No.", message = "R does not come with RStudio; you need to install R separately.")
+    answer("Yes.", correct = TRUE, message = " Yes. RStudio needs the R *engine* to work"),
+    answer("No.", message = "R does not come with RStudio; you need to install R separately. It is best to start by installing R and then RStudio.")
   )
 )
 ```
 
 ## Install Packages
+The R community is very active and has created many packages, each solving a different problem. There are hundreds of packages created each month and we should take advantages of this packages to avoid reinventing the wheel. 
+
+> If our computer was a plane, we may think of the packages as all the components needed to fly (gyroscope, lights, GPS, ... )   
 
 ### How to install R packages
+The best way is to follow the instructions in this video (*1 min 32s*)
 
 ![](https://vimeo.com/203516241)
 
