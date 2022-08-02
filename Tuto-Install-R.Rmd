@@ -1,6 +1,6 @@
 ---
 title: "Setting up" 
-author: Christophe Bontemps - SIAP
+author: "Christophe Bontemps - SIAP"
 date: '2022-08-02'
 output:
   learnr::tutorial: 
