@@ -1,3 +1,5 @@
 # RAP-Course
 Slides and materials for an RAP course
-> Adapted (and simplified) from Josef Crispell wonderful materials
+> Adapted (and simplified) from various sources, including 
+- Josef Crispell wonderful materials
+- Learner package by Garrick Aden-Buie
