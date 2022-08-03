@@ -1,5 +1,5 @@
 ---
-title: "Setting up" 
+title: "R you prepared?" 
 author: "Christophe Bontemps - SIAP"
 date: '2022-08-02'
 output:
@@ -14,7 +14,9 @@ description: >
 
 ```{r setup, include=FALSE}
 library(learnr)
-tutorial_options(exercise.timelimit = 60)
+library(tidyverse)
+library(nycflights13)
+
 # From https://rstudio.github.io/learnr/
 ```
 
@@ -23,7 +25,7 @@ tutorial_options(exercise.timelimit = 60)
 
 ## Welcome 
 
-This is an interactive tutorial that should help you verify that you and  your computer are ready to use the materials developed for this course.^[This document uses materials developed by *Garrick Aden-Buie, Barret Schloerke & JJ Allaire* , the creators of the [learner](https://rstudio.github.io/learnr/) package]  
+This is an interactive tutorial that should help you verify that you and your computer are ready to use the materials developed for this course using R and RStudio.^[This document uses materials developed by *Garrick Aden-Buie, Barret Schloerke & JJ Allaire* , the creators of the [learner](https://rstudio.github.io/learnr/) package]  
 
 ### Learning Objectives
 At the end of this tutorial you should be able to:  
@@ -31,13 +33,13 @@ At the end of this tutorial you should be able to:
 * Install R on your computer
 * Install the RStudio IDE
 * Install the `tidyverse` R package
+* Run a few lines of R code
 
-You can skip this tutorial if you've already done these things, by it may be safer to check (click `continue`).
+You can skip this tutorial if you've already done these things and are familiar with R and RStudio environments, but it may be safer to check!
 
 ### Is this tutorial for you?
 
 Do you need to work through the tutorial? Take the quiz below to find out.
-
 
 ```{r quiz1, echo = FALSE}
 question("Check all that is TRUE:",
@@ -55,7 +57,7 @@ question("Check all that is TRUE:",
 ## Install R
 *R* is the core piece of software that we need and we certainly wouldn't be able to do anything without a proper and recent version installed on our computers. 
 
-> If our computer was a plane, we may think of R as the engine
+> If your computer was a plane, we may think of R as the engine
 
 ### How to install R
 The best way is to follow the instructions in this video (*1 min 30s*)
@@ -81,6 +83,7 @@ quiz(caption = "Quiz - About R",
     answer("Everytime you use it", message = "This will be too often unless you use R very rarely!"),
     answer("About once a year", correct = TRUE, "A new version of R is released about once a year. Update sooner if you encounter a bug that you cannot explain."),
     answer("Never", message = "A new version of R is released about once a year. I'll assume that you are using the newest version of R, which will be the fastest version with the fewest unexpected behaviors." ),
+    random_answer_order = TRUE,
     allow_retry = TRUE
   )
 )
@@ -89,7 +92,7 @@ quiz(caption = "Quiz - About R",
 ## Install RStudio
 RStudio is an Integrated Development Environment (IDE) for R. It means that RStudio helps you write and work with R in a very intuitive and simple way.  
 
-> If our computer was a plane, we may think of RStudio as the cockpit  
+> If your computer was a plane, we may think of RStudio as the cockpit  
 
 ### How to install RStudio
 
@@ -131,7 +134,7 @@ quiz(caption = "Quiz - Install RStudio",
 ## Install Packages
 The R community is very active and has created many packages, each solving a different problem. There are hundreds of packages created each month and we should take advantages of this packages to avoid reinventing the wheel. 
 
-> If our computer was a plane, we may think of the packages as all the components needed to fly (gyroscope, lights, GPS, ... )   
+> If your computer was a plane, we may think of the packages as all the components needed to fly (gyroscope, lights, GPS, ... )   
 
 ### How to install R packages
 The best way is to follow the instructions in this video (*1 min 32s*)
@@ -165,3 +168,128 @@ quiz(caption = "Quiz - Working with Packages",
   )
 )
 ```
+
+
+## Test your R  skills
+
+
+### Prerequisites
+To practice these skills, we will use the `flights` data set from the nycflights13 package. This data frame comes from the US [Bureau of Transportation Statistics](https://www.transtats.bts.gov/Homepage.asp){target="_blank"} and contains all `r format(nrow(nycflights13::flights), big.mark = ",")` flights that departed from New York City in 2013. The variables are documented in [the description file on the CRAN](https://rdrr.io/cran/nycflights13/man/flights.html){target="_blank"} but you can check also directly within R, as we will see. 
+
+If you are ready to begin, click on!
+
+###  The dataset
+Before playing with some functions in the tidyverse package, let's have a look at the variables available in the `flights` data set using some base R commands 
+
+```{r data, exercise = TRUE, exercise.eval = FALSE}
+names(flights)
+```
+
+Now, can you display the first lines of the data set (maybe using using the  `head()` function) ?
+
+
+```{r filter2, exercise = TRUE, exercise.eval = FALSE}
+
+```
+
+```{r filter2-solution}
+head(flights, n=5)
+```
+
+> If that wasn't easy for you, you may face some difficulties in this course!
+
+
+### Playing with `tidyverse` (and `filter()`)
+
+`filter()` lets you use a logical test to extract specific rows from a data frame. To use `filter()`, pass it the data frame followed by one or more logical tests. `filter()` will return every row that passes each logical test.
+
+So for example, we can use `filter()` to select every flight in flights that departed on January 1st. Click `Run Code` to give it a try:
+
+```{r filter1, exercise = TRUE, exercise.eval = FALSE}
+flights %>% 
+  filter(month == 1, 
+         day == 1)
+```
+
+
+### Test Your Knowledge
+
+***What will the following code return?** 
+  
+```{r, eval= FALSE}
+flights %>%
+  filter( month == 11 | month == 12)
+```
+
+
+```{r logicals, echo = FALSE}
+question("",
+         answer("Every flight that departed in November _or_ December", correct = TRUE),
+         answer("Every flight that departed in November _and_ December",
+                message = "Technically a flight could not have departed in November _and_ December unless it departed twice."),
+         answer("Every flight _except for_ those that departed in November or December",
+                message = "No, there is no negative statement in this code."),
+         answer("An error. This is an incorrect way to combine tests.",
+                message = "No, this code is perfectly fine. It use the `|` operator meaning *or*. "),
+         allow_retry = TRUE
+)
+```
+
+### Common mistakes
+
+In R, the order of operations doesn't work like English. You **can't** write `filter(flights, month == 11 | 12)`, even though you might say  "finds all flights that departed in November *or* December". Be sure to write out a *complete* test on each side of a boolean operator.
+
+Here are four more tips to help you use logical tests and Boolean operators in R:
+
+###
+
+1. A useful short-hand for this problem is `x %in% y`. This will select every row where `x` is one of the values in `y`. We could use it to rewrite the code in the question above:
+
+    ```{r, eval = FALSE}
+nov_dec <-  flights %>%
+      filter(month %in% c(11, 12))
+    ```
+
+### Exercise 
+
+Use the code chunks below to find all flights that:
+
+1. Had an arrival *delay* of two or more hours (that's 120 minutes!)
+
+    ```{r filterex1, exercise = TRUE}
+    
+    ```
+    
+    ```{r filterex1-solution}
+    flights %>% 
+      filter(arr_delay >= 120) # arr_delay is in minutes
+    ```
+
+1. Flew to Houston (`IAH` or `HOU`)
+
+    ```{r filterex2, exercise = TRUE}
+    
+    ```
+    
+    ```{r filterex2-solution}
+    flights %>%
+      filter(dest %in% c("IAH", "HOU"))
+    ```
+
+    
+
+1. Were operated by United (`UA`), American (`AA`), or Delta (`DL`)
+
+
+    ```{r filterex3, exercise = TRUE}
+    
+    ```
+    
+    ```{r filterex3-solution}
+    filter(flights, carrier %in% c("UA", "AA", "DL"))
+    ```
+
+    <div id="filterex3-hint">
+    **Hint:** The `carrier` variable lists the airline that operated each flight. This is another good case for the `%in%` operator.
+    </div>
+
