@@ -55,3 +55,34 @@ a {
     width: 80%;
     font-size: 0.6em;
   }
+
+
+ /*  == Custom for SIAP == */
+ 
+
+ /* The logo on the title page and the rectangular element containing it can be customised with CSS. F*/
+
+.gdbar img {
+  width: 300px !important;
+  height: 150px !important;
+  margin: 8px 8px;
+}
+
+.gdbar {
+  width: 400px !important;
+  height: 170px !important;
+}
+
+/* Colors  and style */
+ 
+.blue {
+   color: #037AA3;
+}
+
+.emphasized {
+   font-size: 1.2em;
+}
+
+h1, h2 {
+  color: #037AA3;
+}
