@@ -285,7 +285,7 @@ Tracking the three **W**s:
 -   **W**hich change(s)?
 -   **W**hy?
 
-<img src="images/VersionControl_explained.png" width="40%" height="auto" align="right"/>
+<img src="images/VersionControl_explained.png" width="50%" height="auto" align="right"/>
 
 ::: notes
 And what about version control - why is that important?
