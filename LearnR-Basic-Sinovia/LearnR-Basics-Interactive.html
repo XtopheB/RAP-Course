@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="date" content="2023-10-23" />
+
+<meta name="progressive" content="true" />
+<meta name="allow-skip" content="true" />
+<meta name="learnr-version-prerender" content="0.11.3" />
+
+<title>Learn R - The Basics</title>
+
+<!-- header-includes START -->
+<!-- HEAD_CONTENT -->
+<!-- header-includes END -->
+<!-- HEAD_CONTENT -->
+
+<!-- highlightjs -->
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+<!-- taken from https://github.com/rstudio/rmarkdown/blob/de8a9c38618903627ca509f5401d50a0876079f7/inst/rmd/h/default.html#L293-L343 -->
+<!-- tabsets -->
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+<!-- end tabsets -->
+
+
+</head>
+
+<body>
+<a class='sr-only sr-only-focusable visually-hidden-focusable' href='#learnr-tutorial-content'>Skip to Tutorial Content</a>
+
+
+
+<div class="pageContent band">
+<main class="bandContent page">
+
+<article class="topics" id="learnr-tutorial-content">
+
+<p><img src="www/Banner_Gender_Stats_Training.png"
+style="width:90.0%" /></p>
+<div id="section-welcome" class="section level2">
+<h2>Welcome</h2>
+<p>Welcome to the interactive tutorial designed for participants of the
+<strong><em>Subregional Training on Monitoring Financial Protection in
+Health</em></strong>, to support their introduction to the R statistical
+software. This is an interactive tutorial that should help you verify
+that you and your computer are ready to use the materials developed for
+this course using R and RStudio.<a href="#section-fn1"
+class="footnote-ref" id="section-fnref1"><sup>1</sup></a></p>
+<div id="section-learning-objectives" class="section level3">
+<h3>Learning Objectives</h3>
+<p>At the end of this tutorial you should be able to:</p>
+<ul>
+<li>Install R on your computer</li>
+<li>Install the RStudio IDE</li>
+<li>Install the <code>tidyverse</code> R package</li>
+<li>Run a few lines of R code</li>
+</ul>
+<p>You can skip this tutorial if you’ve already done these things and
+are familiar with R and RStudio environments, but it may be safer to
+check!</p>
+</div>
+<div class="footnotes footnotes-end-of-section">
+<hr />
+<ol>
+<li id="section-fn1"><p>This document uses materials developed by
+<em>Garrick Aden-Buie, Barret Schloerke, JJ Allaire &amp; Alexander
+Rossell Hayes</em> , the creators of the <a
+href="https://rstudio.github.io/learnr/">learner</a> package. <em>This
+version is 2.3 (October 2023)</em>.<a href="#section-fnref1"
+class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+<div id="section-is-this-tutorial-for-you" class="section level3">
+<h3>Is this tutorial for you?</h3>
+<p>Do you need to work through the tutorial? Take the quiz below to find
+out.</p>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz1" class="tutorial-question panel-body">
+<div id="quiz1-answer_container" class="shiny-html-output"></div>
+<div id="quiz1-message_container" class="shiny-html-output"></div>
+<div id="quiz1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<blockquote>
+<p><em>We highly recommend that you follow the order of the items
+proposed in this tutorial</em>!</p>
+</blockquote>
+</div>
+</div>
+<div id="section-install-r" class="section level2">
+<h2>Install R</h2>
+<div id="section-what-is-r" class="section level3">
+<h3>What is R?</h3>
+<p>R is a statistical programming language and environment for
+statistical computing and graphics. It is an alternative to the
+traditional statistical packages such as SPSS, STATA and SAS. It has
+several benefits including: (i) it is open source – license free (ii) it
+can be used on 3 all operating systems: MacOS, Linux, UNIX and Windows;
+and (iii) it is supported by an extensive community.</p>
+<blockquote>
+<p>If your computer was a plane, we may think of R as the engine and
+propeller</p>
+</blockquote>
+</div>
+<div id="section-how-to-install-r" class="section level3">
+<h3>How to install R</h3>
+<p>The best way is to follow the instructions in this video (<em>1 min
+30s</em>)</p>
+<p><img src="https://vimeo.com/203516510" /></p>
+<p>Link to install R: <a
+href="https://cran.r-project.org/">https://cran.r-project.org/</a></p>
+</div>
+<div id="section-test-your-knowledge" class="section level3">
+<h3>Test your knowledge</h3>
+<div class="panel-heading tutorial-quiz-title">Quiz - About R</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz2-1" class="tutorial-question panel-body">
+<div id="quiz2-1-answer_container" class="shiny-html-output"></div>
+<div id="quiz2-1-message_container" class="shiny-html-output"></div>
+<div id="quiz2-1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz2-2" class="tutorial-question panel-body">
+<div id="quiz2-2-answer_container" class="shiny-html-output"></div>
+<div id="quiz2-2-message_container" class="shiny-html-output"></div>
+<div id="quiz2-2-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz2-3" class="tutorial-question panel-body">
+<div id="quiz2-3-answer_container" class="shiny-html-output"></div>
+<div id="quiz2-3-message_container" class="shiny-html-output"></div>
+<div id="quiz2-3-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+</div>
+</div>
+<div id="section-install-rstudio" class="section level2">
+<h2>Install RStudio</h2>
+<div id="section-what-is-rstudio" class="section level3">
+<h3>What is RStudio?</h3>
+<p>RStudio is an R-specific Integrated Development Environment (IDE).
+This means it is a piece of software that was built for R (even though
+it can support other programming languages software) that combines
+several tools in one environment to make working with R more productive.
+The RStudio IDE comprises several windows including a console, an editor
+for writing, editing and executing source code along with tools for
+plotting, viewing history, debugging and managing your workspace. There
+are other IDEs (not explored in this course) that are compatible and
+which can be used with R. However, RStudio is the most common,
+beginner-friendly software for R users and the main tool that will be
+used for the practical exercises in this e-learning course.</p>
+<blockquote>
+<p>If your computer was a plane, we may think of RStudio as the
+cockpit</p>
+</blockquote>
+</div>
+<div id="section-how-to-install-rstudio" class="section level3">
+<h3>How to install RStudio</h3>
+<p>RStudio makes editing, programming and visualizing in R much easier
+and we highly recommend that you install it and use it.</p>
+<p>For that, follow the instructions in this video (<em>50 sec</em>)</p>
+<p><img src="https://vimeo.com/203516968" /></p>
+<p>Link to install RStudio: <a
+href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></p>
+</div>
+<div id="section-test-your-knowledge-1" class="section level3">
+<h3>Test your knowledge</h3>
+<div class="panel-heading tutorial-quiz-title">Quiz - Install RStudio</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz3-1" class="tutorial-question panel-body">
+<div id="quiz3-1-answer_container" class="shiny-html-output"></div>
+<div id="quiz3-1-message_container" class="shiny-html-output"></div>
+<div id="quiz3-1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz3-2" class="tutorial-question panel-body">
+<div id="quiz3-2-answer_container" class="shiny-html-output"></div>
+<div id="quiz3-2-message_container" class="shiny-html-output"></div>
+<div id="quiz3-2-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz3-3" class="tutorial-question panel-body">
+<div id="quiz3-3-answer_container" class="shiny-html-output"></div>
+<div id="quiz3-3-message_container" class="shiny-html-output"></div>
+<div id="quiz3-3-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="quiz3-4" class="tutorial-question panel-body">
+<div id="quiz3-4-answer_container" class="shiny-html-output"></div>
+<div id="quiz3-4-message_container" class="shiny-html-output"></div>
+<div id="quiz3-4-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+</div>
+</div>
+<div id="section-install-packages" class="section level2">
+<h2>Install Packages</h2>
+<p>R has several functions that are loaded and available in the basic
+installation of the programme. However, there are a range of other
+convenient functions and codes written by R users that can be used
+freely during your R session. These functions are distributed as R
+packages, which are basically a collection of R code, data sets,
+documentation, and tests that can be easily shared with others.</p>
+<blockquote>
+<p>If your computer was a plane, we may think of the packages as all the
+components needed to fly (landing gear, gyroscope, lights, GPS, … )</p>
+</blockquote>
+<p>To see the list of packages that were loaded in the basic
+installation of RStudio, go the “Files/ Plots/ Packages and Help” pane
+and select the tab Packages. You can learn about the packages by
+searching the searching the packages by name in the Help tab.</p>
+<div id="section-how-to-install-r-packages" class="section level3">
+<h3>How to install R packages</h3>
+<p>The best way is to follow the instructions in this video (<em>1 min
+32s</em>)</p>
+<p><img src="https://vimeo.com/203516241" /></p>
+</div>
+<div id="section-the-tidyverse-package" class="section level3">
+<h3>The “tidyverse” package</h3>
+<p>To use an R package that did not come with the installation of
+RStudio, you must first install it, using the command
+<code>install.packages()</code>. For example, to install the package
+<em>tidyverse</em>, type and execute the following line of code in the
+script editor window. The argument for the R function is the name of the
+package, which must be enclosed by double quotation marks. The tidyverse
+package is essential for data manipulation, exploration and
+visualization</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>This command will install the package <em>tidyverse</em> and store it
+in a directory in the R environment referred to as the “library”. The
+<em>tidyverse</em> package contains 8 packages namely <em>ggplot2,
+dplyr, tidyr, readr, purrr, tibble, stringr, and forcats</em> that are
+loaded automatically once with the
+<code>install.packages(“tidyverse”)</code> command.</p>
+</div>
+<div id="section-the-foreign-and-haven-packages" class="section level3">
+<h3>The “foreign” and “haven” Packages</h3>
+<p>One very commonly used R package is called “<em>foreign</em>”. This
+package is necessary to read and write data files from other statistical
+software such as SPSS, Stata, SAS and Minitab into R. It is also needed
+for reading and writing “dBase” files that carry the .dbf extension.</p>
+<blockquote>
+<p>To search for the “foreign” package, go to the “<em>Files/ Plots/
+Packages and Help</em>” pane and select the tab Packages. Type
+“<em>foreign</em>” in the search bar. You should see a result like the
+image below. The unchecked box means that the package is available in
+the library but has not been loaded for the library for use in the
+current R session. <img src="www/packages.png"
+style="width:60.0%" /></p>
+</blockquote>
+<p>Similar to the “<em>foreign</em>” package, R includes a package
+called “<em>haven</em>” that also support the import and export of data
+sets in commercial statistical packages such as SPSS, Stata and SAS.</p>
+</div>
+<div id="section-how-to-access-packages-after-they-have-been-installed"
+class="section level3">
+<h3>How to access packages after they have been installed</h3>
+<p>To use R packages during your R session, you must load it from the
+library using the <code>library()</code> function. For example, to load
+the foreign package, we do the following:</p>
+<pre class="r"><code>library(&quot;foreign&quot;)</code></pre>
+<p>To access the manual for packages that have been loaded in the
+library, use the <em>help</em> argument with the function
+<code>library( )</code></p>
+<pre class="r"><code>library(help=&quot;foreign&quot;)</code></pre>
+<p>Alternatively, you can simply use <code>help( )</code> function and
+specify the name of the package:</p>
+<pre class="r"><code>help(&quot;foreign&quot;)</code></pre>
+<blockquote>
+<p>Note: You need to install R packages only once. However, you must
+load the relevant packages needed to perform the desired functions in R
+(using the <code>library( )</code> function), each time you start any R
+session.</p>
+</blockquote>
+</div>
+<div id="section-test-your-knowledge-2" class="section level3">
+<h3>Test your knowledge</h3>
+<div class="panel-heading tutorial-quiz-title">Quiz - Working with Packages</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="names-1" class="tutorial-question panel-body">
+<div id="names-1-answer_container" class="shiny-html-output"></div>
+<div id="names-1-message_container" class="shiny-html-output"></div>
+<div id="names-1-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="names-2" class="tutorial-question panel-body">
+<div id="names-2-answer_container" class="shiny-html-output"></div>
+<div id="names-2-message_container" class="shiny-html-output"></div>
+<div id="names-2-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="names-3" class="tutorial-question panel-body">
+<div id="names-3-answer_container" class="shiny-html-output"></div>
+<div id="names-3-message_container" class="shiny-html-output"></div>
+<div id="names-3-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+</div>
+</div>
+<div id="section-a-short-tutorial-on-r" class="section level2">
+<h2>A short tutorial on R</h2>
+<div id="section-r-assignment-operator" class="section level3">
+<h3>R Assignment Operator:</h3>
+<p>R uses <code>&lt;-</code> as the assignment operator. This is a
+combination of the less than symbol (&lt;) and hyphen (-). Essentially,
+the assignment operator tells R to assign values or data to a named
+object or variable.</p>
+<pre class="r"><code>a &lt;- 3 + 4
+a</code></pre>
+<pre><code>## [1] 7</code></pre>
+<p>In the block of code above, we performed a simple mathematical
+operation <strong>3 + 4</strong> and stored the sum in
+<strong>a</strong> variable called a. Variables are used to store values
+for later use. The code above allows R to evaluate the expression 3 + 4
+(on the right of the assignment operator) and then assign the sum 7, to
+the variable a (on the left of the assignment operator), for later
+use.</p>
+<blockquote>
+<p>Notice that the result is not immediately visible in the console.
+Instead, you can see the name of the variable in the R workspace, under
+the environment tab. To print out or view the content of the variable
+<strong>a</strong> in the console, simply type the name of the variable
+and run the command. You should now see the value (7) displayed in the
+console.</p>
+</blockquote>
+</div>
+<div id="section-adding-comments-to-your-code" class="section level3">
+<h3>Adding comments to your code:</h3>
+<p>It is a good practice to annotate your code in the R script editor.
+This includes adding short explanations on what the code or commands
+that you have written do as well as the meaning of variables or any
+objects that are created during an R Session. These explanations are
+written as comments.</p>
+<p>In R, comments are preceded by the symbol <code>#</code> (pound or
+hash). This helps R distinguish between comments and actual lines or
+blocks of code that the R programme must execute.</p>
+<pre class="r"><code># Create variable a that stores the sum of 3 and 4
+a &lt;- 3 + 4
+a</code></pre>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="section-basic-r-syntax" class="section level3">
+<h3>Basic R syntax</h3>
+<p>Let us define some elements to play with:</p>
+<pre class="r"><code># Here I define a numerical variable 
+myage &lt;- 25
+
+# And I can show it
+myage</code></pre>
+<pre><code>## [1] 25</code></pre>
+<p>Now if I want to make it pretty, I can use the <code>paste()</code>
+function. This function is quite useful for presenting results, titles,
+etc; as it <em>paste</em> text ( within quotes ” “) and other R objects
+(here a number).</p>
+<pre class="r"><code>paste(&quot;My age is&quot;, myage)</code></pre>
+<pre><code>## [1] &quot;My age is 25&quot;</code></pre>
+<blockquote>
+<p>R is <strong>case sensitive</strong>, which means that we have to be
+careful about how we name our objects and recall them</p>
+</blockquote>
+<p>*<strong>What will the following code return?</strong></p>
+<pre class="r"><code>MyAge &lt;- 45
+paste(&quot;My age is&quot;, myage)</code></pre>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="Case" class="tutorial-question panel-body">
+<div id="Case-answer_container" class="shiny-html-output"></div>
+<div id="Case-message_container" class="shiny-html-output"></div>
+<div id="Case-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<p>Try it by yourself and click on the <code>Run Code</code> blue
+button. You can modify the code to change value, rename the objects
+<em>myage</em>, *MyAge etc.</p>
+<div class="tutorial-exercise" data-label="tryit" data-completion="1"
+data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>myage &lt;- 25
+MyAge &lt;- 45
+
+paste(&quot;My age is&quot;, myage)</code></pre>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+</div>
+<div id="section-objects" class="section level3">
+<h3>Objects</h3>
+<p>In R everything is an <strong>object</strong>. This means that an
+element may embed some other <em>“things”</em></p>
+<blockquote>
+<p>Let’s create objects!</p>
+</blockquote>
+<div id="section-vectors" class="section level4">
+<h4>Vectors</h4>
+<p>Vectors can be create (and conceived) as a concatenation of numbers.
+We use The c()` function to concatenate objects.</p>
+<pre class="r"><code># Let&#39;s create a vector
+a &lt;- c(1, 2, 3)
+# And another one 
+b &lt;- c(4, 5, 6)
+
+# Assign values to &quot;mystring&quot;
+mystring &lt;- c(a, b)
+
+mystring</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6</code></pre>
+<p>We have a double concatenation here since <code>c(1,2,3)</code>is
+already a concatenate object (a vector here)</p>
+<blockquote>
+<p>But we can also concatenate things that are of <strong>different
+nature</strong>!</p>
+</blockquote>
+<p>*<strong>What will the following code return?</strong></p>
+<pre class="r"><code>myobject &lt;- c(&quot;A&quot; , 1 )
+myobject</code></pre>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="Concat" class="tutorial-question panel-body">
+<div id="Concat-answer_container" class="shiny-html-output"></div>
+<div id="Concat-message_container" class="shiny-html-output"></div>
+<div id="Concat-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+</div>
+</div>
+<div id="section-data-frames" class="section level3">
+<h3>Data Frames</h3>
+<p>A data frame is the equivalent of a tabular, where we store data in
+rows and columns. We will use these structures a lot, and as any object
+in R, we can access to its different component with different
+methods</p>
+<blockquote>
+<p>Let’s create data frames and play with them!</p>
+</blockquote>
+<pre class="r"><code># Creating a data frame
+mydata &lt;- data.frame(name = c(&quot;John&quot;, &quot;Sokol&quot;, &quot;Chris&quot;),
+                     age = c(25, 30, 28),
+                     student = c(TRUE, FALSE, FALSE))</code></pre>
+<p>We have lots of tools to play with data frames</p>
+<pre class="r"><code># Here we have the first lines of this very small data frame
+head(mydata)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"John","2":"25","3":"TRUE","_rn_":"1"},{"1":"Sokol","2":"30","3":"FALSE","_rn_":"2"},{"1":"Chris","2":"28","3":"FALSE","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>The <strong>structure</strong> of the data frame is given by
+<code>str()</code> function. It is very important to identify which
+variable is numerical or integer, or a character (string) or a Boolean
+(TRUE/FALSE) as some operations will only apply for some <em>type</em>
+of variables.</p>
+<pre class="r"><code>str(mydata)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3 obs. of  3 variables:
+##  $ name   : chr  &quot;John&quot; &quot;Sokol&quot; &quot;Chris&quot;
+##  $ age    : num  25 30 28
+##  $ student: logi  TRUE FALSE FALSE</code></pre>
+<p>In this example, we have 3 objects embedded in the data frame
+<code>mydata</code> which are: <code>name</code> (character),
+<code>age</code> (numeric) and <code>student</code> (logical). Each
+element can be accessed directly by adding the $ sign to the data frame.
+For example, the full list of names can be accessed using:</p>
+<pre class="r"><code>mydata$name</code></pre>
+<pre><code>## [1] &quot;John&quot;  &quot;Sokol&quot; &quot;Chris&quot;</code></pre>
+<p>But, we can also extract information directly from the data frame
+using its rows and columns.</p>
+<p>*<strong>What will the following code return?</strong></p>
+<pre class="r"><code>mydata[1,]</code></pre>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="extract" class="tutorial-question panel-body">
+<div id="extract-answer_container" class="shiny-html-output"></div>
+<div id="extract-message_container" class="shiny-html-output"></div>
+<div id="extract-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+<p>Check it out by yourself</p>
+<div class="tutorial-exercise" data-label="mydata" data-completion="1"
+data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code># run this code to find out! 
+mydata[1,]</code></pre>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<p>We can also have quick statistics using the <code>summary()</code>
+function. As you see in the output, the <code>summary()</code> function
+adapts the result to the <strong>type</strong> of variable, whether it
+is a character (no summary for <em>name</em>), a numeric variable
+(<em>age</em>), or a Boolean or logical variable (<em>student</em> takes
+TRUE or FALSE values).</p>
+<blockquote>
+<p>This is an important feature of R functions and highlights the
+importance having the right <em>type</em> for the variables used in our
+analysis.</p>
+</blockquote>
+<pre class="r"><code># A summary
+summary(mydata)</code></pre>
+<pre><code>##      name                age         student       
+##  Length:3           Min.   :25.00   Mode :logical  
+##  Class :character   1st Qu.:26.50   FALSE:2        
+##  Mode  :character   Median :28.00   TRUE :1        
+##                     Mean   :27.67                  
+##                     3rd Qu.:29.00                  
+##                     Max.   :30.00</code></pre>
+<div id="section-a-new-data.frame" class="section level4">
+<h4>A new data.frame</h4>
+<p>Consider the <code>data.frame</code>
+<strong><em>mynewdata</em></strong></p>
+<pre class="r"><code>mynewdata &lt;-  data.frame(
+  name = c(&quot;Aldovia&quot;, &quot;Borovia&quot;, &quot;Corundia&quot;, &quot;Dagbon&quot;, &quot;Elbonia&quot;),
+  area = c(10000, 20000, 15000, 18000, 22000),
+  flag_color = c(&quot;Red&quot;, &quot;Blue&quot;, &quot;Green&quot;, &quot;Yellow&quot;, &quot;Purple&quot;),
+  english = c(TRUE, FALSE, FALSE, FALSE, TRUE)
+)</code></pre>
+<p>Play with <code>mynewdata</code> (recommended) and
+<strong>then</strong> extract the <strong>third</strong> element of the
+<strong>first</strong> row</p>
+<div class="tutorial-exercise" data-label="extract2" data-completion="1"
+data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code># Enter your solution below</code></pre>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="extract2-hint-1"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code># maybe you could use the head function first
+head(mynewdata)</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="extract2-hint-2"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code># Now that you have seen the data, you have to extract elements and fill the blanks here:
+mynewdata[ , ]</code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="extract2-solution"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code># Solution : 1 for the row and 3 for column in that order
+mynewdata[1,3]</code></pre>
+</div>
+<blockquote>
+<p>We’ll see later on that there are many other ways to play with
+<code>data.frames</code></p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="section-importing-data-into-r" class="section level2">
+<h2>Importing data into R</h2>
+<p>Before we can begin any analysis, we need to first read or import
+that data set into R.<br />
+R allows the import of data of various types, from data stored in
+commonly used formats such as comma-separated values (CSV) or MS Excel
+(xls) to those stored in commercial statistical packages such as SPSS,
+STATA or SAS.<br />
+In this tutorial, we will explore how to import a data set in STATA file
+format, which carries the file extension <em>.dta</em>.</p>
+<p>To read a STATA data file into R, we use the command
+<code>read.dta( )</code> function. To use this function, we need to load
+the “<em>haven</em>” package presented earlier. This package has the
+relevant tools and functions to import data from commercial
+software.</p>
+<p>The function <code>read.dta( )</code> accepts only one argument,
+which is the full name or file path, including the file extension as
+shown below.</p>
+<pre class="r"><code># loading the  haven package
+library(haven)
+# loading the data
+mytest &lt;- read.dta(&quot;testdata.dta&quot;)</code></pre>
+<p>The lines of code above first load the package <em>haven</em> using
+the <code>library()</code> function. The second line, creates a data
+frame called <code>mytest</code> that stores the data from the data file
+called “<em>testdata.dta</em>”. Remember that a data frame is a data
+structure in R that stores spread-sheet like data, as rows (observations
+or cases) and columns (variables).</p>
+</div>
+<div id="section-data-exploration" class="section level2">
+<h2>Data exploration</h2>
+<div id="section-data-sets-operations" class="section level3">
+<h3>Data sets operations</h3>
+<p>We will use a pre-loaded data set with some SDGs. The name of the
+data frame is simply <code>SDG</code></p>
+<div id="section-the-dataset" class="section level4">
+<h4>The dataset</h4>
+<p>Before playing with some functions, let’s have a look at the
+variables available in the <code>SDG</code> data set using some base R
+commands.</p>
+<p>First, let us see what are the variables using the
+<code>names()</code> function.</p>
+<div class="tutorial-exercise" data-label="data" data-completion="1"
+data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>names(SDG)</code></pre>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<p>Now, can you display the first 5 lines of the data set (maybe using
+using the <code>head()</code> function) ?</p>
+<div class="tutorial-exercise" data-label="filter2" data-completion="1"
+data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<p><strong>Note:</strong> by default, <code>head()</code> shows the
+<strong>6</strong> first rows! <em>Try maybe with an option (type a
+comma, inside the function, after the name of the data frame to see some
+options)</em></p>
+<div class="tutorial-exercise-support" data-label="filter2-solution"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code>head(SDG, n=5)</code></pre>
+</div>
+<blockquote>
+<p>That was easy, right?</p>
+</blockquote>
+</div>
+</div>
+<div id="section-playing-with-tidyverse" class="section level3">
+<h3>Playing with <code>tidyverse</code></h3>
+<p>There are many functions available in this <em>meta</em> package
+<code>tidyverse</code>, in particular, one has many tools for filtering
+and visualizing the data.</p>
+<p>First, let’s examine the <code>pipe</code> operator that links
+operations: <code>%&gt;%</code>.</p>
+<p>Imagine we are only interested in the first 3 variables and want to
+count the number of countries that are in the “Asia” region.</p>
+<pre class="r"><code># I create a new data frame with only the first 3 variables (note the use of &quot; : &quot; )
+df &lt;- SDG[, 1:3]
+
+#Now I want to subset that data to keep only the &quot;Asia&quot; region (note the use of &quot; subset() &quot; )
+df &lt;- subset(df, region_name == &quot;Asia&quot; &amp; population &gt;= 50) 
+
+# Counting the number of rows (note the use of &quot; nrow()&quot; )
+nrow(df)</code></pre>
+<pre><code>## [1] 12</code></pre>
+<p>This requires quite a few lines of code…</p>
+<blockquote>
+<p>But there is a quicker and more readable solution</p>
+</blockquote>
+<p>Then <code>%&gt;%</code> links operations in a very easy-to-read
+sequence. The code below does exactly the same operation as before, but
+using operation linking using <code>%&gt;%</code></p>
+<div class="tutorial-exercise" data-label="filter1" data-completion="1"
+data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>SDG %&gt;%  
+  subset(region_name == &quot;Asia&quot; &amp;  population &gt;= 50) %&gt;%
+  nrow()</code></pre>
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<p>This operator <code>%&gt;%</code> (or <em>pipe</em>) will forward a
+value, or the result of an expression, into the next function
+call/expression.</p>
+<blockquote>
+<p>One may read <code>%&gt;%</code> as <em>next do this (please)</em>
+!</p>
+</blockquote>
+<p>An alternative to <code>subset()</code> is the function
+<code>filter()</code> that lets you use a logical test to extract
+specific rows from a data frame. <code>filter()</code> will return every
+row that passes <strong>each</strong> logical test.</p>
+</div>
+<div id="section-test-your-knowledge-3" class="section level3">
+<h3>Test Your Knowledge</h3>
+<p>We can use many different operations to filter data, such as:</p>
+<ul>
+<li>== (identical), &gt; (strictly greater), &gt;= (greater or
+equal)<br />
+</li>
+<li>&amp; (and) , | (or) , ! (not)</li>
+</ul>
+<p>*<strong>What will the following code return?</strong></p>
+<pre class="r"><code>SDG %&gt;%  
+  filter(region_name == &#39;Asia&#39; | region_name == &quot;Africa&quot;,
+         internet_use &gt; 60 ) </code></pre>
+<div class="panel panel-default tutorial-question-container">
+<div data-label="logicals" class="tutorial-question panel-body">
+<div id="logicals-answer_container" class="shiny-html-output"></div>
+<div id="logicals-message_container" class="shiny-html-output"></div>
+<div id="logicals-action_button_container" class="shiny-html-output"></div>
+<script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
+</div>
+</div>
+</div>
+<div id="section-common-mistakes" class="section level3">
+<h3>Common mistakes</h3>
+<p>In R, the order of operations doesn’t work like English. You
+<strong>can’t</strong> write
+<code>filter(SDG, region_name == "Asia" | "Africa" )</code>, even though
+you want all countries that are either in Asia or Africa.</p>
+<p>Here are four more tips to help you use logical tests and Boolean
+operators in R:</p>
+</div>
+<div id="section-section" class="section level3">
+<h3></h3>
+<ol style="list-style-type: decimal">
+<li>A useful short-hand for this problem is <code>x %in% y</code>. This
+will select every row where <code>x</code> is one of the values in
+<code>y</code>. We could use it to rewrite the code in the question
+above:</li>
+</ol>
+<pre class="r"><code>SDG %&gt;%  
+ filter(region_name %in% c(&quot;Asia&quot;, &quot;Africa&quot;) , internet_use &gt; 60 ) </code></pre>
+<p>One may also use some advanced functions such as
+<code>str_starts</code> (<em>string starts with</em>), but in our case,
+the output will include “Americas”</p>
+<pre class="r"><code>SDG %&gt;%  
+  filter(str_starts(region_name, &#39;A&#39;) , internet_use &gt; 50 ) </code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["region_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["population"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["gross_domestic_product"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["maternal_mortality_ratio"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["internet_use"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"Antigua and Barbuda","2":"Americas","3":"0.1","4":"4.700000","5":"42.000000","6":"73.00000"},{"1":"Argentina","2":"Americas","3":"44.9","4":"-2.200000","5":"39.000000","6":"74.30000"},{"1":"Armenia","2":"Asia","3":"3.0","4":"7.600000","5":"26.000000","6":"64.70000"},{"1":"Aruba","2":"Americas","3":"0.1","4":"2.000000","5":"-320.785982","6":"97.20000"},{"1":"Azerbaijan","2":"Asia","3":"10.0","4":"2.200000","5":"26.000000","6":"79.00000"},{"1":"Bahrain","2":"Asia","3":"1.6","4":"1.800000","5":"14.000000","6":"95.90000"},{"1":"Barbados","2":"Americas","3":"0.3","4":"-0.100000","5":"27.000000","6":"81.80000"},{"1":"Bermuda","2":"Americas","3":"0.1","4":"1.279551","5":"88.560572","6":"98.40000"},{"1":"Brazil","2":"Americas","3":"211.0","4":"1.100000","5":"60.000000","6":"67.50000"},{"1":"Brunei Darussalam","2":"Asia","3":"0.4","4":"3.900000","5":"31.000000","6":"94.90000"},{"1":"Cabo Verde","2":"Africa","3":"0.5","4":"5.700000","5":"58.000000","6":"57.20000"},{"1":"Canada","2":"Americas","3":"37.6","4":"1.700000","5":"10.000000","6":"92.70000"},{"1":"Cayman Islands","2":"Americas","3":"0.1","4":"3.300000","5":"-371.240694","6":"81.10000"},{"1":"Chile","2":"Americas","3":"19.0","4":"1.100000","5":"13.000000","6":"82.30000"},{"1":"China","2":"Asia","3":"1397.7","4":"6.100000","5":"29.000000","6":"54.30000"},{"1":"China","2":"Asia","3":"1397.7","4":"6.100000","5":"29.000000","6":"54.30000"},{"1":"China","2":"Asia","3":"1397.7","4":"6.100000","5":"29.000000","6":"54.30000"},{"1":"Colombia","2":"Americas","3":"50.3","4":"3.300000","5":"83.000000","6":"62.30000"},{"1":"Costa Rica","2":"Americas","3":"5.0","4":"2.100000","5":"27.000000","6":"71.60000"},{"1":"Cuba","2":"Americas","3":"11.3","4":"2.200000","5":"36.000000","6":"57.10000"},{"1":"Cyprus","2":"Asia","3":"1.2","4":"3.200000","5":"6.000000","6":"80.70000"},{"1":"Djibouti","2":"Africa","3":"1.0","4":"7.500000","5":"248.000000","6":"55.70000"},{"1":"Dominica","2":"Americas","3":"0.1","4":"5.700000","5":"213.743426","6":"69.60000"},{"1":"Dominican Republic","2":"Americas","3":"10.7","4":"5.100000","5":"95.000000","6":"67.60000"},{"1":"Ecuador","2":"Americas","3":"17.4","4":"0.100000","5":"59.000000","6":"54.10000"},{"1":"Gabon","2":"Africa","3":"2.2","4":"3.400000","5":"252.000000","6":"50.30000"},{"1":"Georgia","2":"Asia","3":"3.7","4":"5.100000","5":"25.000000","6":"59.70000"},{"1":"Greenland","2":"Americas","3":"0.1","4":"3.200000","5":"-49.383150","6":"69.50000"},{"1":"Grenada","2":"Americas","3":"0.1","4":"3.100000","5":"25.000000","6":"59.10000"},{"1":"Israel","2":"Asia","3":"9.1","4":"3.500000","5":"3.000000","6":"81.60000"},{"1":"Jamaica","2":"Americas","3":"2.9","4":"0.700000","5":"80.000000","6":"55.10000"},{"1":"Japan","2":"Asia","3":"126.3","4":"0.700000","5":"5.000000","6":"91.70000"},{"1":"Jordan","2":"Asia","3":"10.1","4":"2.000000","5":"46.000000","6":"66.80000"},{"1":"Kazakhstan","2":"Asia","3":"18.5","4":"4.500000","5":"10.000000","6":"76.40000"},{"1":"Kuwait","2":"Asia","3":"4.2","4":"0.400000","5":"12.000000","6":"98.00000"},{"1":"Lebanon","2":"Asia","3":"6.9","4":"-5.600000","5":"29.000000","6":"78.20000"},{"1":"Malaysia","2":"Asia","3":"31.9","4":"4.300000","5":"29.000000","6":"80.10000"},{"1":"Maldives","2":"Asia","3":"0.5","4":"5.200000","5":"53.000000","6":"63.20000"},{"1":"Mauritius","2":"Africa","3":"1.3","4":"3.600000","5":"61.000000","6":"55.40000"},{"1":"Mexico","2":"Americas","3":"127.6","4":"-0.100000","5":"33.000000","6":"63.90000"},{"1":"Morocco","2":"Africa","3":"36.5","4":"2.300000","5":"70.000000","6":"61.80000"},{"1":"Oman","2":"Asia","3":"5.0","4":"0.500000","5":"19.000000","6":"80.20000"},{"1":"Panama","2":"Americas","3":"4.2","4":"3.000000","5":"52.000000","6":"60.00000"},{"1":"Paraguay","2":"Americas","3":"7.0","4":"0.000000","5":"129.000000","6":"61.10000"},{"1":"Peru","2":"Americas","3":"32.5","4":"2.200000","5":"88.000000","6":"50.50000"},{"1":"Philippines","2":"Asia","3":"108.1","4":"6.000000","5":"121.000000","6":"60.10000"},{"1":"Puerto Rico","2":"Americas","3":"3.2","4":"1.200000","5":"21.000000","6":"68.70000"},{"1":"Qatar","2":"Asia","3":"2.8","4":"-0.200000","5":"9.000000","6":"97.40000"},{"1":"Saudi Arabia","2":"Asia","3":"34.3","4":"0.300000","5":"17.000000","6":"94.20000"},{"1":"Seychelles","2":"Africa","3":"0.1","4":"4.700000","5":"53.000000","6":"58.80000"},{"1":"Singapore","2":"Asia","3":"5.7","4":"0.700000","5":"8.000000","6":"84.50000"},{"1":"Sint Maarten (Dutch part)","2":"Americas","3":"0.0","4":"-8.400000","5":"8.950778","6":"75.17006"},{"1":"South Africa","2":"Africa","3":"58.6","4":"0.200000","5":"119.000000","6":"56.20000"},{"1":"Thailand","2":"Asia","3":"69.6","4":"2.400000","5":"37.000000","6":"52.90000"},{"1":"Trinidad and Tobago","2":"Americas","3":"1.4","4":"0.000000","5":"67.000000","6":"77.30000"},{"1":"Tunisia","2":"Africa","3":"11.7","4":"1.000000","5":"43.000000","6":"55.50000"},{"1":"Turkey","2":"Asia","3":"83.4","4":"0.900000","5":"17.000000","6":"64.70000"},{"1":"Turks and Caicos Islands","2":"Americas","3":"0.0","4":"5.300000","5":"3.109648","6":"59.72417"},{"1":"United Arab Emirates","2":"Asia","3":"9.8","4":"1.700000","5":"3.000000","6":"94.80000"},{"1":"Uruguay","2":"Americas","3":"3.5","4":"0.200000","5":"17.000000","6":"70.30000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="section-exercise" class="section level3">
+<h3>Exercise</h3>
+<p>Use the code chunks below to count the number of countries that:</p>
+<div id="section-have-a-maternal-mortality-rate-lower-than-12"
+class="section level4">
+<h4>Have a <em>maternal mortality rate</em> lower than 12%</h4>
+<div class="tutorial-exercise" data-label="filterex1"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="filterex1-solution"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code>SDG %&gt;% 
+  filter(maternal_mortality_ratio &lt;= 12)</code></pre>
+</div>
+<blockquote>
+<p>Is there a problem in the result ?</p>
+</blockquote>
+</div>
+<div
+id="section-find-out-wich-are-the-countries-with-a-negative-values-for-maternal-mortality-rate"
+class="section level4">
+<h4>Find out wich are the countries with a negative values for
+<em>maternal mortality rate</em></h4>
+<div class="tutorial-exercise" data-label="filterex2"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="filterex2-solution"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code># To ease the reading, we use select() to restrict to variables of interest 
+SDG %&gt;% 
+filter(maternal_mortality_ratio &lt; 0 ) %&gt;%
+  select(country, maternal_mortality_ratio)</code></pre>
+</div>
+</div>
+<div
+id="section-find-the-number-of-countries-in-asia-with-a-maternal-mortality-rate-lower-than-30"
+class="section level4">
+<h4>Find the number of countries in Asia with a <em>maternal mortality
+rate</em> lower than 30%?</h4>
+<div class="tutorial-exercise" data-label="filterex3"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<script type="application/json" data-ui-opts="1">{"engine":"r","has_checker":false,"caption":"<span data-i18n=\"text.enginecap\" data-i18n-opts=\"{&quot;engine&quot;:&quot;R&quot;}\">R Code<\/span>"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="filterex3-hint"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code># Here there is a problem since we  have duplicates. One may use  distinct() 
+
+SDG %&gt;% 
+filter(maternal_mortality_ratio &lt;30 , region_name ==&quot;Asia&quot; ) %&gt;%
+  select(country, population, maternal_mortality_ratio) </code></pre>
+</div>
+<div class="tutorial-exercise-support" data-label="filterex3-solution"
+data-completion="1" data-diagnostics="1" data-startover="1"
+data-lines="0">
+<pre class="text"><code># Solution: We use distinct() in the end to remove duplicates
+
+SDG %&gt;% 
+filter(maternal_mortality_ratio &lt;30 , region_name ==&quot;Asia&quot; ) %&gt;%
+  select(country, population, maternal_mortality_ratio)  %&gt;% 
+  distinct() </code></pre>
+</div>
+<p><strong>Yes</strong> there is a duplicate problem! Can you solve it?
+(<em>see the <code>hints</code> to find out</em>).</p>
+<blockquote>
+<p>There are a lot of other things to learn, please read the <a
+href="https://dplyr.tidyverse.org/reference/index.html">Tidyverse
+reference manual</a> and enjoy other tutorials like <a
+href="https://www.r-bloggers.com/2021/04/tidyverse-in-r-complete-tutorial/">this
+one</a> or <a
+href="https://www.pkimes.com/PR2019replicathon/tutorials/0b_R_tidyverse.html">that
+one</a> and search on the web by yourself, there are hundreds of
+examples. Enjoy!</p>
+</blockquote>
+<hr />
+</div>
+</div>
+<div id="section-references" class="section level3">
+<h3>References:</h3>
+<p>Richard, Cotton (2013). Learning R. Sebastopol, California: O’Reilly
+Media.</p>
+<p>RStudio IDE. (2021). RStudio. Retrieved October 4, 2021, from <a
+href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a></p>
+<p><em>Posit Primers</em> developed by RStudio (now <em>Posit</em>) are
+also useful references <a
+href="https://posit.cloud/learn/primers">https://posit.cloud/learn/primers</a></p>
+<hr />
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+<span property="dct:title">Tutorial created</span> by <span
+property="cc:attributionName">Christophe Bontemps (SIAP) </span> is
+licensed under
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC
+BY-NC-SA
+4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a>
+</p>
+<p>
+<script type="application/shiny-prerendered" data-context="server-start">
+# In this chuck, all elements are loaded for the rest of the document!
+library(learnr)
+library(tidyverse)
+library(nycflights13)
+#library(stringer)
+
+# Loading data
+SouthAfrica <-read.csv2("https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv")
+
+SDG <- read.csv("./www/SDGperRegion.csv") %>%
+  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) 
+
+mydata <- data.frame(name = c("John", "Sokol", "Chris"),
+                     age = c(25, 30, 28),
+                     student = c(TRUE, FALSE, FALSE))
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::register_http_handlers(session, metadata = NULL)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::prepare_tutorial_state(session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::i18n_observe_tutorial_language(input, session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+session$onSessionEnded(function() {
+        learnr:::event_trigger(session, "session_stop")
+      })
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quiz1", question = structure("Check all that is TRUE:", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_a05bbd1", 
+    option = "R is NOT installed on my computer", value = "R is NOT installed on my computer", 
+    label = structure("R is NOT installed on my computer", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("<ul>\n<li>Install R<\u002fli>\n<\u002ful>\n", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_5239570", 
+    option = "RStudio is NOT installed on my computer", value = "RStudio is NOT installed on my computer", 
+    label = structure("RStudio is NOT installed on my computer", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("<ul>\n<li>Install RStudio IDE<\u002fli>\n<\u002ful>\n", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_658f826", 
+    option = "The **tidyverse** package is NOT installed on my computer", 
+    value = "The **tidyverse** package is NOT installed on my computer", 
+    label = structure("The <strong>tidyverse<\u002fstrong> package is NOT installed on my computer", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("<ul>\n<li>Install Packages<\u002fli>\n<\u002ful>\n", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_4c3affa", 
+    option = "I've done them all.", value = "I've done them all.", 
+    label = structure("I’ve done them all.", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("You can skip the next steps and test your R skils directly", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Don’t worry, this tutorial is here to help!  To get set up follow the tutorial and follow (at least):", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Don’t worry, this tutorial is here to help!  To get set up follow the tutorial and follow (at least):", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz1-answer", question = "quiz1"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 2135745702.00547, 
+    options = list()), class = c("learnr_checkbox", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-1", question = structure("Is R free to download and use?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_ddcf907", 
+    option = "Yes!", value = "Yes!", label = structure("Yes!", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("R is free <em>and<\u002fem> open source, which means that anyone can read, use, and copy the source code of the R language.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_a9a3884", 
+    option = "No.", value = "No.", label = structure("No.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("R is indeed free <em>AND<\u002fem> open source, which means that anyone can read, use, and copy the source code of the R language.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz2-1-answer", question = "quiz2-1"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 1987114054.07468, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-2", question = structure("Where do you download R?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_570433", 
+    option = "www.rstudio.com/download", value = "www.rstudio.com/download", 
+    label = structure("<a href=\"http://www.rstudio.com/download\">www.rstudio.com/download<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_43480e8", 
+    option = "[cloud.r-project.org](http://cloud.r-project.org)", 
+    value = "[cloud.r-project.org](http://cloud.r-project.org)", 
+    label = structure("<a href=\"http://cloud.r-project.org\">cloud.r-project.org<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("You can also download R from <a href=\"http://cran.r-project.org\">cran.r-project.org<\u002fa>", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_502e288", 
+    option = "www.r-project.org", value = "www.r-project.org", 
+    label = structure("<a href=\"http://www.r-project.org\">www.r-project.org<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("Good try, but not exactly. <a href=\"http://www.r-project.org\">www.r-project.org<\u002fa> doesn’t provide a download link, but it does provide a link to one the websites above.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_34aa66d", 
+    option = "www.r.com", value = "www.r.com", label = structure("<a href=\"http://www.r.com\">www.r.com<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz2-2-answer", question = "quiz2-2"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1272940695.90724, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz2-3", question = structure("How often should you update R?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_2e93a57", 
+    option = "Everytime you use it", value = "Everytime you use it", 
+    label = structure("Everytime you use it", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("This will be too often unless you use R very rarely!", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_8ac9a01", 
+    option = "About once a year", value = "About once a year", 
+    label = structure("About once a year", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("A new version of R is released about once a year. Update sooner if you encounter a bug that you cannot explain.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_58f453b", 
+    option = "Never", value = "Never", label = structure("Never", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("A new version of R is released about once a year. I’ll assume that you are using the newest version of R, which will be the fastest version with the fewest unexpected behaviors.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz2-3-answer", question = "quiz2-3"), loading = NULL, 
+    random_answer_order = TRUE, allow_retry = TRUE, seed = 1347621602.37246, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-1", question = structure("What is the RStudio IDE?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_3d6d9b1", 
+    option = "An application that makes it easier to use R.", 
+    value = "An application that makes it easier to use R.", 
+    label = structure("An application that makes it easier to use R.", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("RStudio organizes your workspace and makes it easier to write, use, debug, and save R code. We highly recommend it and we will rely on the RStudio IDE in this course.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_37cb8aa", 
+    option = "An application that let's you use R without writing any code", 
+    value = "An application that let's you use R without writing any code", 
+    label = structure("An application that let’s you use R without writing any code", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("And thank goodness! Code provides a reproducible record of your work, which is essential for data science.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_732f18c", 
+    option = "A spreadsheet program like Microsoft Excel.", value = "A spreadsheet program like Microsoft Excel.", 
+    label = structure("A spreadsheet program like Microsoft Excel.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No. Although we can visualise data in RStudio almost as in Microsoft Excel, RStudio is much more than that!", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9627fbe", 
+    option = "Another name for R", value = "Another name for R", 
+    label = structure("Another name for R", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No. R and RStudio are two separate things: R is the real data and code processing <em>engine<\u002fem> while RStudio is the environment that facilitate your life to provide instrcutions, like a <em>cokpit<\u002fem>.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz3-1-answer", question = "quiz3-1"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 2115278711.015, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-2", question = structure("Is the RStudio IDE free to download and use?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_d656f3a", 
+    option = "Yes!", value = "Yes!", label = structure("Yes!", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_50fad51", 
+    option = "No.", value = "No.", label = structure("No.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("Like R, RStudio is free and open-source. There do exist professional versions of RStudio with enhanced features, but we will not rely on those features.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz3-2-answer", question = "quiz3-2"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 1768516245.67647, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-3", question = structure("Where do you download RStudio?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_8eac4c2", 
+    option = "www.rstudio.com/download", value = "www.rstudio.com/download", 
+    label = structure("<a href=\"http://www.rstudio.com/download\">www.rstudio.com/download<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("For these tutorials, download and install the RStudio Desktop Open Source License.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_249fdae", 
+    option = "[cloud.r-project.org](http://cloud.r-project.org)", 
+    value = "[cloud.r-project.org](http://cloud.r-project.org)", 
+    label = structure("<a href=\"http://cloud.r-project.org\">cloud.r-project.org<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("This is where you download R, not RStudio.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_9787264", 
+    option = "www.r-project.org", value = "www.r-project.org", 
+    label = structure("<a href=\"http://www.r-project.org\">www.r-project.org<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_802a52b", 
+    option = "[cran.rstudio.org](http://cran.rstudio.org)", value = "[cran.rstudio.org](http://cran.rstudio.org)", 
+    label = structure("<a href=\"http://cran.rstudio.org\">cran.rstudio.org<\u002fa>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz3-3-answer", question = "quiz3-3"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 1391854065.85187, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz3-4", question = structure("Do you need to install R if you already have RStudio?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_4208cf2", 
+    option = "Yes.", value = "Yes.", label = structure("Yes.", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("Yes. RStudio needs the R <em>engine<\u002fem> to work", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_7ba64fb", 
+    option = "No.", value = "No.", label = structure("No.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("R does not come with RStudio; you need to install R separately. It is best to start by installing R and then RStudio.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "quiz3-4-answer", question = "quiz3-4"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = FALSE, seed = 1760222429.68033, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "names-1", question = structure("What command do you use to install packages?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_dc576f4", 
+    option = "`library()`", value = "`library()`", label = structure("<code>library()<\u002fcode>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("We will see what <code>library()<\u002fcode> does later.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_6ee24bd", 
+    option = "`install.packages()`", value = "`install.packages()`", 
+    label = structure("<code>install.packages()<\u002fcode>", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_7dd2645", 
+    option = "`install_packages()`", value = "`install_packages()`", 
+    label = structure("<code>install_packages()<\u002fcode>", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_d64a10a", 
+    option = "There is no command. You must visit [cran.r-project.org](http://cran.r-project.org) and download packages manually.", 
+    value = "There is no command. You must visit [cran.r-project.org](http://cran.r-project.org) and download packages manually.", 
+    label = structure("There is no command. You must visit <a href=\"http://cran.r-project.org\">cran.r-project.org<\u002fa> and download packages manually.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("R makes it easy to download packages. You connect to the internet and then run one of the commands above.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "names-1-answer", question = "names-1"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 603131042.219145, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "names-2", question = structure("How often do you need to install a package on your computer?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_9e84632", 
+    option = "Every time you restart R", value = "Every time you restart R", 
+    label = structure("Every time you restart R", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_692c9e0", 
+    option = "Every time you restart your computer", value = "Every time you restart your computer", 
+    label = structure("Every time you restart your computer", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_837a9e9", 
+    option = "Only once. Afterwards, R can find it on your hard drive as needed.", 
+    value = "Only once. Afterwards, R can find it on your hard drive as needed.", 
+    label = structure("Only once. Afterwards, R can find it on your hard drive as needed.", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_15ba773", 
+    option = "Never, as long as you are connected to the internet.", 
+    value = "Never, as long as you are connected to the internet.", 
+    label = structure("Never, as long as you are connected to the internet.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("This could be true if you are using R over a cloud service. However, if you are using R locally on your own computer, you will need to install each package that you use on your computer.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "names-2-answer", question = "names-2"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 659490411.692901, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "names-3", question = structure("What is the tidyverse?", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_e7d6c11", 
+    option = "A collection of packages that work well together and provide tools for common data science tasks.", 
+    value = "A collection of packages that work well together and provide tools for common data science tasks.", 
+    label = structure("A collection of packages that work well together and provide tools for common data science tasks.", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("You can install all of the tidyverse packages at once with <code>install.packages(&quot;tidyverse&quot;)<\u002fcode>.", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_21747f7", 
+    option = "A word processing program for R", value = "A word processing program for R", 
+    label = structure("A word processing program for R", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_b39a406", 
+    option = "A code style that reads like poetry", value = "A code style that reads like poetry", 
+    label = structure("A code style that reads like poetry", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_3446fb0", 
+    option = "An alternate universe where everyone is an R programmer.", 
+    value = "An alternate universe where everyone is an R programmer.", 
+    label = structure("An alternate universe where everyone is an R programmer.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = NULL, type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "names-3-answer", question = "names-3"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 196506174.408495, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "Case", question = structure("", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_cff68e1", 
+    option = "My age is 45", value = "My age is 45", label = structure("My age is 45", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("Well, that would true be if <em><strong>MyAge<\u002fstrong><\u002fem> and <em><strong>myage<\u002fstrong><\u002fem>  are similar. But since R is case sensitive, these two objects are different", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_808fe83", 
+    option = "My age is 25", value = "My age is 25", label = structure("My age is 25", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("Well-done! My age is 25 because R is case-sensitive", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_cfd292d", 
+    option = "25", value = "25", label = structure("25", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, We used <code>paste()<\u002fcode> to heave a sentence that assemble the text “My age is” and the value", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "Case-answer", question = "Case"), loading = NULL, 
+    random_answer_order = FALSE, allow_retry = TRUE, seed = 946866764.059081, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-tryit-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-tryit-code-editor`)), session)
+output$`tutorial-exercise-tryit-output` <- renderUI({
+  `tutorial-exercise-tryit-result`()
+})
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "tryit", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "tryit", code = "myage <- 25\nMyAge <- 45\n\npaste(\"My age is\", myage)", 
+        opts = list(label = "\"tryit\"", exercise = "TRUE", exercise.eval = "FALSE"), 
+        engine = "r")), code_check = NULL, error_check = NULL, 
+    check = NULL, solution = NULL, tests = NULL, options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, size = "normalsize", background = "#F7F7F7", 
+        strip.white = TRUE, cache = 0, cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "tryit", exercise = TRUE, exercise.eval = FALSE, 
+        code = c("myage <- 25", "MyAge <- 45", "", "paste(\"My age is\", myage)"
+        ), out.width.px = 624, out.height.px = 384, params.src = "tryit, exercise = TRUE, exercise.eval = FALSE", 
+        fig.num = 0, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "Concat", question = structure("", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_d399042", 
+    option = "A1", value = "A1", label = structure("A1", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("Well, not quite", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_3391a94", 
+    option = " \"A \" \"1\" ", value = " \"A \" \"1\" ", label = structure("“A “ “1”", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("Well-done", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_e6e5464", 
+    option = "An error", value = "An error", label = structure("An error", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, We can really concatenate different things", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "Concat-answer", question = "Concat"), loading = NULL, 
+    random_answer_order = TRUE, allow_retry = TRUE, seed = 1714103480.70181, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "extract", question = structure("", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_9fcc979", 
+    option = "The first row of mydata (John 25 TRUE) ", value = "The first row of mydata (John 25 TRUE) ", 
+    label = structure("The first row of mydata (John 25 TRUE)", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("Well-done", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_b207374", 
+    option = "The first column of mydata with all names (John Sokol Chris) ", 
+    value = "The first column of mydata with all names (John Sokol Chris) ", 
+    label = structure("The first column of mydata with all names (John Sokol Chris)", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, but that was close", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_c867f5f", 
+    option = "The first element of mydata (John)", value = "The first element of mydata (John)", 
+    label = structure("The first element of mydata (John)", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, try again", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "extract-answer", question = "extract"), loading = NULL, 
+    random_answer_order = TRUE, allow_retry = TRUE, seed = 156526447.427112, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-mydata-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-mydata-code-editor`)), session)
+output$`tutorial-exercise-mydata-output` <- renderUI({
+  `tutorial-exercise-mydata-result`()
+})
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "mydata", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "mydata", code = "# run this code to find out! \nmydata[1,]\n", 
+        opts = list(label = "\"mydata\"", exercise = "TRUE"), 
+        engine = "r")), code_check = NULL, error_check = NULL, 
+    check = NULL, solution = NULL, tests = NULL, options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, size = "normalsize", background = "#F7F7F7", 
+        strip.white = TRUE, cache = 0, cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "mydata", exercise = TRUE, 
+        code = c("# run this code to find out! ", "mydata[1,]", 
+        ""), out.width.px = 624, out.height.px = 384, params.src = "mydata, exercise = TRUE", 
+        fig.num = 0, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-extract2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-extract2-code-editor`)), session)
+output$`tutorial-exercise-extract2-output` <- renderUI({
+  `tutorial-exercise-extract2-result`()
+})
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "extract2", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = "mynewdata <-  data.frame(\n  name = c(\"Aldovia\", \"Borovia\", \"Corundia\", \"Dagbon\", \"Elbonia\"),\n  area = c(10000, 20000, 15000, 18000, 22000),\n  flag_color = c(\"Red\", \"Blue\", \"Green\", \"Yellow\", \"Purple\"),\n  english = c(TRUE, FALSE, FALSE, FALSE, TRUE)\n)", 
+    chunks = list(list(label = "prepare-a", code = "mynewdata <-  data.frame(\n  name = c(\"Aldovia\", \"Borovia\", \"Corundia\", \"Dagbon\", \"Elbonia\"),\n  area = c(10000, 20000, 15000, 18000, 22000),\n  flag_color = c(\"Red\", \"Blue\", \"Green\", \"Yellow\", \"Purple\"),\n  english = c(TRUE, FALSE, FALSE, FALSE, TRUE)\n)", 
+        opts = list(label = "\"prepare-a\"", exercise.eval = "TRUE"), 
+        engine = "r"), list(label = "extract2", code = "# Enter your solution below\n\n", 
+        opts = list(label = "\"extract2\"", exercise = "TRUE", 
+            exercise.eval = "FALSE", exercise.setup = "\"prepare-a\""), 
+        engine = "r")), code_check = NULL, error_check = NULL, 
+    check = NULL, solution = structure(c("# Solution : 1 for the row and 3 for column in that order", 
+    "mynewdata[1,3]"), chunk_opts = list(label = "extract2-solution")), 
+    tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
+        tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
+        comment = NA, highlight = FALSE, size = "normalsize", 
+        background = "#F7F7F7", strip.white = TRUE, cache = 0, 
+        cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "extract2", exercise = TRUE, 
+        exercise.eval = FALSE, exercise.setup = "prepare-a", 
+        code = c("# Enter your solution below", "", ""), out.width.px = 624, 
+        out.height.px = 384, params.src = "extract2,  exercise = TRUE, exercise.eval = FALSE, exercise.setup = \"prepare-a\"", 
+        fig.num = 0, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-data-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-data-code-editor`)), session)
+output$`tutorial-exercise-data-output` <- renderUI({
+  `tutorial-exercise-data-result`()
+})
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "data", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "data", code = "names(SDG)", opts = list(
+        label = "\"data\"", exercise = "TRUE", exercise.eval = "FALSE"), 
+        engine = "r")), code_check = NULL, error_check = NULL, 
+    check = NULL, solution = NULL, tests = NULL, options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, size = "normalsize", background = "#F7F7F7", 
+        strip.white = TRUE, cache = 0, cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "data", exercise = TRUE, exercise.eval = FALSE, 
+        code = "names(SDG)", context = "data", out.width.px = 624, 
+        out.height.px = 384, params.src = "data, exercise = TRUE, exercise.eval = FALSE", 
+        fig.num = 0, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-filter2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter2-code-editor`)), session)
+output$`tutorial-exercise-filter2-output` <- renderUI({
+  `tutorial-exercise-filter2-result`()
+})
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "filter2", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "filter2", code = "", opts = list(
+        label = "\"filter2\"", exercise = "TRUE", exercise.eval = "FALSE"), 
+        engine = "r")), code_check = NULL, error_check = NULL, 
+    check = NULL, solution = structure("head(SDG, n=5)", chunk_opts = list(
+        label = "filter2-solution")), tests = NULL, options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, size = "normalsize", background = "#F7F7F7", 
+        strip.white = TRUE, cache = 0, cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "filter2", exercise = TRUE, 
+        exercise.eval = FALSE, code = "", out.width.px = 624, 
+        out.height.px = 384, params.src = "filter2, exercise = TRUE, exercise.eval = FALSE", 
+        fig.num = 0L, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-filter1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filter1-code-editor`)), session)
+output$`tutorial-exercise-filter1-output` <- renderUI({
+  `tutorial-exercise-filter1-result`()
+})
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "filter1", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "filter1", code = "SDG %>%  \n  subset(region_name == \"Asia\" &  population >= 50) %>%\n  nrow()", 
+        opts = list(label = "\"filter1\"", exercise = "TRUE", 
+            exercise.eval = "FALSE"), engine = "r")), code_check = NULL, 
+    error_check = NULL, check = NULL, solution = NULL, tests = NULL, 
+    options = list(eval = FALSE, echo = TRUE, results = "markup", 
+        tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
+        comment = NA, highlight = FALSE, size = "normalsize", 
+        background = "#F7F7F7", strip.white = TRUE, cache = 0, 
+        cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "filter1", exercise = TRUE, 
+        exercise.eval = FALSE, code = c("SDG %>%  ", "  subset(region_name == \"Asia\" &  population >= 50) %>%", 
+        "  nrow()"), out.width.px = 624, out.height.px = 384, 
+        params.src = "filter1, exercise = TRUE, exercise.eval = FALSE", 
+        fig.num = 0, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "logicals", question = structure("", html = TRUE, class = c("html", 
+"character")), answers = list(structure(list(id = "lnr_ans_5890a77", 
+    option = "Every country in either Asia or Africa with internet use greater than 60% ", 
+    value = "Every country in either Asia or Africa with internet use greater than 60% ", 
+    label = structure("Every country in either Asia or Africa with internet use greater than 60%", html = TRUE, class = c("html", 
+    "character")), correct = TRUE, message = structure("Yes, the filter applies to region_name with  “ | “  wich means  “ or “ , Excellent!", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_a777dce", 
+    option = "Every country with a name starting with \"A\" with internet use greater than 50% ", 
+    value = "Every country with a name starting with \"A\" with internet use greater than 50% ", 
+    label = structure("Every country with a name starting with “A” with internet use greater than 50%", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, the filter  applies to region_name  not to country. Try again!", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_49826a6", 
+    option = "Every country in either Asia or Africa", value = "Every country in either Asia or Africa", 
+    label = structure("Every country in either Asia or Africa", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, the filter also conditions on internet_use, try again!", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_73091aa", 
+    option = "Every country  with internet use greater than 60%  ", 
+    value = "Every country  with internet use greater than 60%  ", 
+    label = structure("Every country  with internet use greater than 60%", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, the filter applies also to region_name try again!", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer")), structure(list(id = "lnr_ans_aab1036", 
+    option = "An error. This is an incorrect way to combine tests.", 
+    value = "An error. This is an incorrect way to combine tests.", 
+    label = structure("An error. This is an incorrect way to combine tests.", html = TRUE, class = c("html", 
+    "character")), correct = FALSE, message = structure("No, this code is perfectly fine and use two conditions", html = TRUE, class = c("html", 
+    "character")), type = "literal"), class = c("tutorial_question_answer", 
+"tutorial_quiz_answer"))), button_labels = list(submit = structure("<span data-i18n=\"button.questionsubmit\">Submit Answer<\u002fspan>", html = TRUE, class = c("html", 
+"character")), try_again = structure("<span data-i18n=\"button.questiontryagain\">Try Again<\u002fspan>", html = TRUE, class = c("html", 
+"character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html", 
+"character")), try_again = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), incorrect = structure("Incorrect", html = TRUE, class = c("html", 
+"character")), message = NULL, post_message = NULL), ids = list(
+    answer = "logicals-answer", question = "logicals"), loading = NULL, 
+    random_answer_order = TRUE, allow_retry = TRUE, seed = 195766599.408839, 
+    options = list()), class = c("learnr_radio", "tutorial_question"
+)), session = session)
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-filterex1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filterex1-code-editor`)), session)
+output$`tutorial-exercise-filterex1-output` <- renderUI({
+  `tutorial-exercise-filterex1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "filterex1", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "filterex1", code = "", opts = list(
+        label = "\"filterex1\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, error_check = NULL, check = NULL, solution = structure(c("SDG %>% ", 
+    "  filter(maternal_mortality_ratio <= 12)"), chunk_opts = list(
+        label = "filterex1-solution")), tests = NULL, options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, size = "normalsize", background = "#F7F7F7", 
+        strip.white = TRUE, cache = 0, cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "filterex1", exercise = TRUE, 
+        code = "", out.width.px = 624, out.height.px = 384, params.src = "filterex1, exercise = TRUE", 
+        fig.num = 0L, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-filterex2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filterex2-code-editor`)), session)
+output$`tutorial-exercise-filterex2-output` <- renderUI({
+  `tutorial-exercise-filterex2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "filterex2", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "filterex2", code = "", opts = list(
+        label = "\"filterex2\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, error_check = NULL, check = NULL, solution = structure(c("# To ease the reading, we use select() to restrict to variables of interest ", 
+    "SDG %>% ", "filter(maternal_mortality_ratio < 0 ) %>%", 
+    "  select(country, maternal_mortality_ratio)"), chunk_opts = list(
+        label = "filterex2-solution")), tests = NULL, options = list(
+        eval = FALSE, echo = TRUE, results = "markup", tidy = FALSE, 
+        tidy.opts = NULL, collapse = FALSE, prompt = FALSE, comment = NA, 
+        highlight = FALSE, size = "normalsize", background = "#F7F7F7", 
+        strip.white = TRUE, cache = 0, cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "filterex2", exercise = TRUE, 
+        code = "", out.width.px = 624, out.height.px = 384, params.src = "filterex2, exercise = TRUE", 
+        fig.num = 0L, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+
+
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-filterex3-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filterex3-code-editor`)), session)
+output$`tutorial-exercise-filterex3-output` <- renderUI({
+  `tutorial-exercise-filterex3-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::store_exercise_cache(structure(list(label = "filterex3", global_setup = structure(c("# In this chuck, all elements are loaded for the rest of the document!", 
+"library(learnr)", "library(tidyverse)", "library(nycflights13)", 
+"#library(stringer)", "", "# Loading data", "SouthAfrica <-read.csv2(\"https://www.unsiap.or.jp/on_line/ML/MLData/ML_SouthAfrica.csv\")", 
+"", "SDG <- read.csv(\"./www/SDGperRegion.csv\") %>%", "  select(country, region_name,  population, gross_domestic_product, maternal_mortality_ratio, internet_use) ", 
+"", "mydata <- data.frame(name = c(\"John\", \"Sokol\", \"Chris\"),", 
+"                     age = c(25, 30, 28),", "                     student = c(TRUE, FALSE, FALSE))", 
+""), chunk_opts = list(label = "setup", include = FALSE)), setup = NULL, 
+    chunks = list(list(label = "filterex3", code = "", opts = list(
+        label = "\"filterex3\"", exercise = "TRUE"), engine = "r")), 
+    code_check = NULL, error_check = NULL, check = NULL, solution = structure(c("# Solution: We use distinct() in the end to remove duplicates", 
+    "", "SDG %>% ", "filter(maternal_mortality_ratio <30 , region_name ==\"Asia\" ) %>%", 
+    "  select(country, population, maternal_mortality_ratio)  %>% ", 
+    "  distinct() ", "", ""), chunk_opts = list(label = "filterex3-solution")), 
+    tests = NULL, options = list(eval = FALSE, echo = TRUE, results = "markup", 
+        tidy = FALSE, tidy.opts = NULL, collapse = FALSE, prompt = FALSE, 
+        comment = NA, highlight = FALSE, size = "normalsize", 
+        background = "#F7F7F7", strip.white = TRUE, cache = 0, 
+        cache.path = "LearnR-Basics-Interactive_cache/html/", 
+        cache.vars = NULL, cache.lazy = TRUE, dependson = NULL, 
+        autodep = FALSE, cache.rebuild = FALSE, fig.keep = "high", 
+        fig.show = "asis", fig.align = "default", fig.path = "LearnR-Basics-Interactive_files/figure-html/", 
+        dev = "png", dev.args = NULL, dpi = 192, fig.ext = "png", 
+        fig.width = 6.5, fig.height = 4, fig.env = "figure", 
+        fig.cap = NULL, fig.scap = NULL, fig.lp = "fig:", fig.subcap = NULL, 
+        fig.pos = "", out.width = 624, out.height = NULL, out.extra = NULL, 
+        fig.retina = 2, external = TRUE, sanitize = FALSE, interval = 1, 
+        aniopts = "controls,loop", warning = TRUE, error = FALSE, 
+        message = TRUE, render = NULL, ref.label = NULL, child = NULL, 
+        engine = "r", split = FALSE, include = TRUE, purl = TRUE, 
+        max.print = 1000, label = "filterex3", exercise = TRUE, 
+        code = "", out.width.px = 624, out.height.px = 384, params.src = "filterex3, exercise = TRUE", 
+        fig.num = 0L, exercise.df_print = "paged", exercise.checker = "NULL"), 
+    engine = "r", version = "4"), class = c("r", "tutorial_exercise"
+)))
+</script>
+</p>
+<!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["header-attrs"]},{"type":"character","attributes":{},"value":["2.25"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pandoc"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["header-attrs.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.25"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["3.6.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/3.6.0"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery-3.6.0.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquerylib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.1.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/cerulean.min.css"]},{"type":"character","attributes":{},"value":["<style>h1 {font-size: 34px;}\n       h1.title {font-size: 38px;}\n       h2 {font-size: 30px;}\n       h3 {font-size: 24px;}\n       h4 {font-size: 18px;}\n       h5 {font-size: 16px;}\n       h6 {font-size: 12px;}\n       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}\n       pre:not([class]) { background-color: white }<\/style>"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.25"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["pagedtable"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pagedtable-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/pagedtable.js"]},{"type":"character","attributes":{},"value":["css/pagedtable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.25"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["9.12.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["textmate.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.25"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["i18n"]},{"type":"character","attributes":{},"value":["21.6.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/i18n"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["i18next.min.js","tutorial-i18n-init.js"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["<script id=\"i18n-cstm-trns\" type=\"application/json\">{\"language\":\"en\",\"resources\":{\"en\":{\"translation\":{\"button\":{\"runcode\":\"Run Code\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Hint\",\"hint_plural\":\"Hints\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Next Hint\",\"hintprev\":\"Previous Hint\",\"solution\":\"Solution\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"Copy to Clipboard\",\"startover\":\"Start Over\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Continue\",\"submitanswer\":\"Submit Answer\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Previous Topic\",\"nexttopic\":\"Next Topic\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Try Again\"},\"text\":{\"startover\":\"Start Over\",\"areyousure\":\"Are you sure you want to start over? (all exercise progress will be reset)\",\"youmustcomplete\":\"You must complete the\",\"exercise\":\"exercise\",\"exercise_plural\":\"exercises\",\"inthissection\":\"in this section before continuing.\",\"code\":\"Code\",\"enginecap\":\"{{engine}} $t(text.code)\",\"quiz\":\"Quiz\",\"blank\":\"blank\",\"blank_plural\":\"blanks\",\"exercisecontainsblank\":\"This exercise contains {{count}} $t(text.blank).\",\"pleasereplaceblank\":\"Please replace {{blank}} with valid code.\",\"unparsable\":\"It looks like this might not be valid R code. R cannot determine how to turn your text into a complete command. You may have forgotten to fill in a blank, to remove an underscore, to include a comma between arguments, or to close an opening <code>&quot;<\\/code>, <code>'<\\/code>, <code>(<\\/code> or <code>{<\\/code> with a matching <code>&quot;<\\/code>, <code>'<\\/code>, <code>)<\\/code> or <code>}<\\/code>.\\n\",\"unparsablequotes\":\"<p>It looks like your R code contains specially formatted quotation marks or &quot;curly&quot; quotes (<code>{{character}}<\\/code>) around character strings, making your code invalid. R requires character values to be contained in straight quotation marks (<code>&quot;<\\/code> or <code>'<\\/code>).<\\/p> {{code}} <p>Don't worry, this is a common source of errors when you copy code from another app that applies its own formatting to text. You can try replacing the code on that line with the following. There may be other places that need to be fixed, too.<\\/p> {{suggestion}}\\n\",\"unparsableunicode\":\"<p>It looks like your R code contains an unexpected special character (<code>{{character}}<\\/code>) that makes your code invalid.<\\/p> {{code}} <p>Sometimes your code may contain a special character that looks like a regular character, especially if you copy and paste the code from another app. Try deleting the special character from your code and retyping it manually.<\\/p>\\n\",\"unparsableunicodesuggestion\":\"<p>It looks like your R code contains an unexpected special character (<code>{{character}}<\\/code>) that makes your code invalid.<\\/p> {{code}} <p>Sometimes your code may contain a special character that looks like a regular character, especially if you copy and paste the code from another app. You can try replacing the code on that line with the following. There may be other places that need to be fixed, too.<\\/p> {{suggestion}}\\n\",\"and\":\"and\",\"or\":\"or\",\"listcomma\":\", \",\"oxfordcomma\":\",\"}}},\"fr\":{\"translation\":{\"button\":{\"runcode\":\"Lancer le Code\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Indication\",\"hint_plural\":\"Indications\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Indication Suivante\",\"hintprev\":\"Indication Précédente\",\"solution\":\"Solution\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"Copier dans le Presse-papier\",\"startover\":\"Recommencer\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Continuer\",\"submitanswer\":\"Soumettre\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Chapitre Précédent\",\"nexttopic\":\"Chapitre Suivant\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Réessayer\"},\"text\":{\"startover\":\"Recommencer\",\"areyousure\":\"Êtes-vous certains de vouloir recommencer? (La progression sera remise à zéro)\",\"youmustcomplete\":\"Vous devez d'abord compléter\",\"exercise\":\"l'exercice\",\"exercise_plural\":\"des exercices\",\"inthissection\":\"de cette section avec de continuer.\",\"code\":\"Code\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"Quiz\",\"and\":\"et\",\"or\":\"ou\",\"oxfordcomma\":\"\"}}},\"es\":{\"translation\":{\"button\":{\"runcode\":\"Ejecutar código\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Pista\",\"hint_plural\":\"Pistas\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Siguiente pista\",\"hintprev\":\"Pista anterior\",\"solution\":\"Solución\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"Copiar al portapapeles\",\"startover\":\"Reiniciar\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Continuar\",\"submitanswer\":\"Enviar respuesta\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Tema anterior\",\"nexttopic\":\"Tema siguiente\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Volver a intentar\"},\"text\":{\"startover\":\"Reiniciar\",\"areyousure\":\"¿De verdad quieres empezar de nuevo? (todo el progreso del ejercicio se perderá)\",\"youmustcomplete\":\"Debes completar\",\"exercise\":\"el ejercicio\",\"exercise_plural\":\"los ejercicios\",\"inthissection\":\"en esta sección antes de continuar.\",\"code\":\"Código\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"Cuestionario\",\"and\":\"y\",\"or\":\"o\",\"oxfordcomma\":\"\"}}},\"pt\":{\"translation\":{\"button\":{\"runcode\":\"Executar código\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Dica\",\"hint_plural\":\"Dicas\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Próxima dica\",\"hintprev\":\"Dica anterior\",\"solution\":\"Solução\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"Copiar para a área de transferência\",\"startover\":\"Reiniciar\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Continuar\",\"submitanswer\":\"Enviar resposta\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Tópico anterior\",\"nexttopic\":\"Próximo tópico\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Tentar novamente\"},\"text\":{\"startover\":\"Reiniciar\",\"areyousure\":\"Tem certeza que deseja começar novamente? (todo o progresso feito será perdido)\",\"youmustcomplete\":\"Você deve completar\",\"exercise\":\"o exercício\",\"exercise_plural\":\"os exercícios\",\"inthissection\":\"nesta seção antes de continuar.\",\"code\":\"Código\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"Quiz\",\"and\":\"e\",\"or\":\"ou\",\"oxfordcomma\":\"\"}}},\"tr\":{\"translation\":{\"button\":{\"runcode\":\"Çalıştırma Kodu\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Ipucu\",\"hint_plural\":\"İpuçları\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Sonraki İpucu\",\"hintprev\":\"Önceki İpucu\",\"solution\":\"Çözüm\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"Pano'ya Kopyala\",\"startover\":\"Baştan Başlamak\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Devam et\",\"submitanswer\":\"Cevabı onayla\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Önceki Konu\",\"nexttopic\":\"Sonraki Konu\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Tekrar Deneyin\"},\"text\":{\"startover\":\"Baştan Başlamak\",\"areyousure\":\"Baştan başlamak istediğinizden emin misiniz? (tüm egzersiz ilerlemesi kaybolacak)\",\"youmustcomplete\":\"Tamamlamalısın\",\"exercise\":\"egzersiz\",\"exercise_plural\":\"egzersizler\",\"inthissection\":\"devam etmeden önce bu bölümde\",\"code\":\"Kod\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"Sınav\",\"oxfordcomma\":\"\"}}},\"emo\":{\"translation\":{\"button\":{\"runcode\":\"🏃\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"💡\",\"hint_plural\":\"$t(button.hint)\",\"hinttitle\":\"$t(button.hint)\",\"solution\":\"🎯\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"📋\",\"startover\":\"⏮\",\"startovertitle\":\"Start Over\",\"continue\":\"✅\",\"submitanswer\":\"🆗\",\"submitanswertitle\":\"Submit Answer\",\"previoustopic\":\"⬅\",\"nexttopic\":\"➡\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"🔁\"},\"text\":{\"startover\":\"⏮\",\"areyousure\":\"🤔\",\"youmustcomplete\":\"⚠️ 👉 🧑‍💻\",\"exercise\":\"\",\"exercise_plural\":\"\",\"inthissection\":\"\",\"code\":\"💻\",\"enginecap\":\"$t(text.code) {{engine}}\",\"oxfordcomma\":\"\"}}},\"eu\":{\"translation\":{\"button\":{\"runcode\":\"Kodea egikaritu\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Laguntza\",\"hint_plural\":\"Laguntza\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Aurreko laguntza\",\"hintprev\":\"Hurrengo laguntza\",\"solution\":\"Ebazpena\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"Arbelean kopiatu\",\"startover\":\"Berrabiarazi\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Jarraitu\",\"submitanswer\":\"Erantzuna bidali\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Aurreko atala\",\"nexttopic\":\"Hurrengo atala\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Berriro saiatu\"},\"text\":{\"startover\":\"Berrabiarazi\",\"areyousure\":\"Berriro hasi nahi duzu? (egindako lana galdu egingo da)\",\"youmustcomplete\":\"Aurrera egin baino lehen atal honetako\",\"exercise\":\"ariketa egin behar duzu.\",\"exercise_plural\":\"ariketak egin behar dituzu.\",\"inthissection\":\"\",\"code\":\"Kodea\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"Galdetegia\",\"oxfordcomma\":\"\"}}},\"de\":{\"translation\":{\"button\":{\"runcode\":\"Code ausführen\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Tipp\",\"hint_plural\":\"Tipps\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Nächster Tipp\",\"hintprev\":\"Vorheriger Tipp\",\"solution\":\"Lösung\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"In die Zwischenablage kopieren\",\"startover\":\"Neustart\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Weiter\",\"submitanswer\":\"Antwort einreichen\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Vorheriges Kapitel\",\"nexttopic\":\"Nächstes Kapitel\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Nochmal versuchen\"},\"text\":{\"startover\":\"Neustart\",\"areyousure\":\"Bist du sicher, dass du neustarten willst? (der gesamte Lernfortschritt wird gelöscht)\",\"youmustcomplete\":\"Vervollstädinge\",\"exercise\":\"die Übung\",\"exercise_plural\":\"die Übungen\",\"inthissection\":\"in diesem Kapitel, bevor du fortfährst.\",\"code\":\"Code\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"Quiz\",\"blank\":\"Lücke\",\"blank_plural\":\"Lücken\",\"pleasereplaceblank\":\"Bitte ersetze {{blank}} mit gültigem Code.\",\"unparsable\":\"Dies scheint kein gültiger R Code zu sein. R kann deinen Text nicht in einen gültigen Befehl übersetzen. Du hast vielleicht vergessen, die Lücke zu füllen, einen Unterstrich zu entfernen, ein Komma zwischen Argumente zu setzen oder ein eröffnendes <code>&quot;<\\/code>, <code>'<\\/code>, <code>(<\\/code> oder <code>{<\\/code> mit einem zugehörigen <code>&quot;<\\/code>, <code>'<\\/code>, <code>)<\\/code> oder <code>}<\\/code> zu schließen.\\n\",\"and\":\"und\",\"or\":\"oder\",\"listcomma\":\", \",\"oxfordcomma\":\",\"}}},\"ko\":{\"translation\":{\"button\":{\"runcode\":\"코드 실행\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"힌트\",\"hint_plural\":\"힌트들\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"다음 힌트\",\"hintprev\":\"이전 힌트\",\"solution\":\"솔루션\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"클립보드에 복사\",\"startover\":\"재학습\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"다음 학습으로\",\"submitanswer\":\"정답 제출\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"이전 토픽\",\"nexttopic\":\"다음 토픽\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"재시도\"},\"text\":{\"startover\":\"재학습\",\"areyousure\":\"다시 시작 하시겠습니까? (모든 예제의 진행 정보가 재설정됩니다)\",\"youmustcomplete\":\"당신은 완료해야 합니다\",\"exercise\":\"연습문제\",\"exercise_plural\":\"연습문제들\",\"inthissection\":\"이 섹션을 실행하기 전에\",\"code\":\"코드\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"퀴즈\",\"blank\":\"공백\",\"blank_plural\":\"공백들\",\"exercisecontainsblank\":\"이 연습문제에는 {{count}}개의 $t(text.blank)이 포함되어 있습니다.\",\"pleasereplaceblank\":\"{{blank}}를 유효한 코드로 바꾸십시오.\",\"unparsable\":\"이것은 유효한 R 코드가 아닐 수 있습니다. R은 텍스트를 완전한 명령으로 변환하는 방법을 결정할 수 없습니다. 당신은 공백이나 밑줄을 대체하여 채우기, 인수를 컴마로 구분하기, 또는 <code>&quot;<\\/code>, <code>'<\\/code>, <code>(<\\/code> , <code>{<\\/code>로 시작하는 구문을 닫는 <code>&quot;<\\/code>, <code>'<\\/code>, <code>)<\\/code>, <code>}<\\/code>을 잊었을 수도 있습니다.\\n\",\"and\":\"그리고\",\"or\":\"혹은\",\"listcomma\":\", \",\"oxfordcomma\":\"\"}}},\"zh\":{\"translation\":{\"button\":{\"runcode\":\"运行代码\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"提示\",\"hint_plural\":\"提示\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"下一个提示\",\"hintprev\":\"上一个提示\",\"solution\":\"答案\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"复制到剪切板\",\"startover\":\"重新开始\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"继续\",\"submitanswer\":\"提交答案\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"上一专题\",\"nexttopic\":\"下一专题\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"再试一次\"},\"text\":{\"startover\":\"重置\",\"areyousure\":\"你确定要重新开始吗? (所有当前进度将被重置)\",\"youmustcomplete\":\"你必须完成\",\"exercise\":\"练习\",\"exercise_plural\":\"练习\",\"inthissection\":\"在进行本节之前\",\"code\":\"代码\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"测试\",\"blank\":\"空\",\"blank_plural\":\"空\",\"exercisecontainsblank\":\"本练习包含{{count}}个$t(text.blank)\",\"pleasereplaceblank\":\"请在{{blank}}内填写恰当的代码\",\"unparsable\":\"这似乎不是有效的R代码。 R不知道如何将您的文本转换为完整的命令。 您是否忘了填空，忘了删除下划线，忘了在参数之间包含逗号，或者是忘了用<code>&quot;<\\/code>, <code>'<\\/code>, <code>)<\\/code>,<code>}<\\/code>来封闭<code>&quot;<\\/code>, <code>'<\\/code>, <code>(<\\/code>。 or <code>{<\\/code>。\\n\",\"unparsablequotes\":\"<p>您的R代码中似乎含有特殊格式的引号，或者弯引号(<code>{{character}}<\\/code>) 在字符串前后，在R中字符串应该被直引号(<code>&quot;<\\/code> 或者 <code>'<\\/code>)包裹。<\\/p> {{code}} <p>别担心，该错误经常在复制粘贴包含格式的代码时遇到， 您可以尝试将该行中的代码替换为以下代码，也许还有其他地方需要修改。<\\/p> {{suggestion}}\\n\",\"unparsableunicode\":\"<p>您的代码中似乎包含有异常字符(<code>{{character}}<\\/code>),导致代码无效。<\\/p> {{code}} <p>有时候你的代码可能含有看似正常字符的特殊字符，特别是当你复制粘贴其他来源代码的时候。 请试着删除这些特殊字符,重新输入<\\/p>\\n\",\"unparsableunicodesuggestion\":\"<p>您的代码中似乎包含有异常字符(<code>{{character}}<\\/code>),导致代码无效。<\\/p> {{code}} <p>有时候你的代码可能含有看似正常字符的特殊字符，特别是当你复制粘贴其他来源代码的时候。 请试着删除这些特殊字符,重新输入<\\/p>\\n\",\"and\":\"且\",\"or\":\"或\",\"listcomma\":\",\",\"oxfordcomma\":\",\"}}},\"pl\":{\"translation\":{\"button\":{\"runcode\":\"Uruchom kod\",\"runcodetitle\":\"$t(button.runcode) ({{kbd}})\",\"hint\":\"Podpowiedź\",\"hint_plural\":\"Podpowiedzi\",\"hinttitle\":\"$t(button.hint)\",\"hintnext\":\"Następna podpowiedź\",\"hintprev\":\"Poprzednia podpowiedź\",\"solution\":\"Rozwiązanie\",\"solutiontitle\":\"$t(button.solution)\",\"copyclipboard\":\"Kopiuj do schowka\",\"startover\":\"Zacznij od początku\",\"startovertitle\":\"$t(button.startover)\",\"continue\":\"Kontynuuj\",\"submitanswer\":\"Wyślij\",\"submitanswertitle\":\"$t(button.submitanswer)\",\"previoustopic\":\"Poprzednia sekcja\",\"nexttopic\":\"Następna sekcja\",\"questionsubmit\":\"$t(button.submitanswer)\",\"questiontryagain\":\"Spróbuj ponownie\"},\"text\":{\"startover\":\"Zacznij od początku\",\"areyousure\":\"Czy na pewno chcesz zacząć od początku? (cały postęp w zadaniu zostanie utracony)\",\"youmustcomplete\":\"Musisz ukończyć\",\"exercise\":\"ćwiczenie\",\"exercise_plural\":\"ćwiczenia\",\"inthissection\":\"w tej sekcji przed kontynuowaniem\",\"code\":\"Kod\",\"enginecap\":\"$t(text.code) {{engine}}\",\"quiz\":\"Quiz\",\"blank\":\"luka\",\"blank_plural\":\"luk(i)\",\"exercisecontainsblank\":\"To ćwiczenie zawiera {{count}} $t(text.blank).\",\"pleasereplaceblank\":\"Proszę uzupełnić {{blank}} prawidłowym kodem.\",\"unparsable\":\"Wygląda na to, że może to nie być prawidłowy kod R. R nie jest w stanie przetworzyć Twojego tekstu na polecenie. Mogłeś(-aś) zapomnieć wypełnić luki, usunąć podkreślnik, umieścić przecinka między argumentami, lub zamknąć znak <code>&quot;<\\/code>, <code>'<\\/code>, <code>(<\\/code> lub <code>{<\\/code> odpowiadającym <code>&quot;<\\/code>, <code>'<\\/code>, <code>)<\\/code> lub <code>}<\\/code>.\\n\",\"unparsablequotes\":\"<p>Wygląda na to, że Twój kod zawiera szczególnie sformatowane cudzysłowy lub cudzysłowy typograficzne (<code>{{character}}<\\/code>) przy ciągach znaków, co sprawia, że kod jest niepoprawny. R wymaga cudzysłowów prostych (<code>&quot;<\\/code> albo <code>'<\\/code>).<\\/p> {{code}} <p>Nie martw się, to powszechne źródło błędów, gdy kopiuje się kod z innego programu, który sam formatuje teskt. Możesz spróbować zastąpić swój kod następującym kodem. Mogą być też inne miejsca, które wymagają poprawienia.<\\/p> {{suggestion}}\\n\",\"unparsableunicode\":\"<p>Wygląda na to, że Twój kod zawiera niespodziewany znak specjalny (<code>{{character}}<\\/code>), co sprawia, że kod jest niepoprawny.<\\/p> {{code}} <p>Czasami Twój kod może zawierać znak specjalny, który wygląda jak zwykły znak, zwłaszcza jeśli kopiujesz kod z innego programu. Spróbuj usunąć znak specjalny i wpisać do ponownie ręcznie.<\\/p>\\n\",\"unparsableunicodesuggestion\":\"<p>Wygląda na to, że Twój kod zawiera niespodziewany znak specjalny (<code>{{character}}<\\/code>), co sprawia, że kod jest niepoprawny.<\\/p> {{code}} <p>Czasami Twój kod może zawierać znak specjalny, który wygląda jak zwykły znak, zwłaszcza jeśli kopiujesz kod z innego programu. Możesz spróbować zastąpić swój kod następującym kodem. Mogą być też inne miejsca, które wymagają poprawienia.<\\/p> {{suggestion}}\\n\",\"and\":\"i\",\"or\":\"lub\",\"listcomma\":\", \",\"oxfordcomma\":\"\"}}}}}<\/script>"]},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-format"]},{"type":"character","attributes":{},"value":["0.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmarkdown/templates/tutorial/resources"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-format.js"]},{"type":"character","attributes":{},"value":["tutorial-format.css","rstudio-theme.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["3.6.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/3.6.0"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery-3.6.0.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquerylib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.1.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["navigation"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/navigation-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tabsets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.25"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["9.12.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/highlightjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["default.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.25"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["3.6.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/3.6.0"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery-3.6.0.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquerylib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.1.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["6.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fontawesome"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/all.min.css","css/v4-shims.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fontawesome"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["5.5.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["idb-keyvalue"]},{"type":"character","attributes":{},"value":["3.2.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/idb-keyval"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["idb-keyval-iife-compat.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.10.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["2.0.10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.11.3"]}]}]}
+</script>
+<!--/html_preserve-->
+<!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="execution_dependencies">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74]}},"value":[{"type":"character","attributes":{},"value":["backports","base","bslib","cachem","checkmate","cli","colorspace","commonmark","compiler","curl","datasets","digest","dplyr","ellipsis","evaluate","fansi","fastmap","fontawesome","forcats","generics","ggplot2","glue","graphics","grDevices","grid","gtable","hms","htmltools","htmlwidgets","httpuv","jquerylib","jsonlite","knitr","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","munsell","nycflights13","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","rstudioapi","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","timechange","tools","tzdb","utf8","utils","vctrs","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["1.4.1","4.3.0","0.5.0","1.0.8","2.2.0","3.6.1","2.1-0","1.9.0","4.3.0","5.0.0","4.3.0","0.6.31","1.1.3","0.3.2","0.21","1.0.4","1.1.1","0.5.1","1.0.0","0.1.3","3.4.3","1.6.2","4.3.0","4.3.0","4.3.0","0.3.3","1.1.3","0.5.5","1.6.2","1.6.11","0.1.4","1.8.7","1.44","1.3.1","0.11.3","1.0.3","1.9.2","2.0.3","1.6","4.3.0","0.12","0.5.0","1.0.2","1.9.0","2.0.3","1.2.0.1","1.0.2","2.5.1","1.0.10","2.1.4","1.1.1","2.25","2.0.3","0.15.0","0.4.7","1.2.1","1.7.4","4.3.0","1.7.12","1.5.0","3.2.1","1.3.0","1.2.0","2.0.0","0.2.0","4.3.0","0.4.0","1.2.3","4.3.0","0.6.3","2.5.0","0.39","1.8-4","2.3.7"]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+</div>
+
+</article> <!-- topics -->
+
+<div class="topicsContainer">
+<div class="topicsPositioner">
+<div class="band">
+<div class="bandContent topicsListContainer">
+
+<!-- begin doc-metadata -->
+<div id="doc-metadata">
+<h1 class="title toc-ignore" style="display:none;">Learn R - The
+Basics</h1>
+<h4 class="author"><em><hr />
+<p>Sinovia Moonie - SIAP <a href="mailto:moonie@un.org"
+class="email">moonie@un.org</a></p></em></h4>
+<h4 class="date"><em>2023-10-23</em></h4>
+</div>
+<!-- end doc-metadata -->
+
+</div> <!-- bandContent.topicsListContainer -->
+</div> <!-- band -->
+</div> <!-- topicsPositioner -->
+</div> <!-- topicsContainer -->
+
+
+</main> <!-- bandContent page -->
+</div> <!-- pageContent band -->
+
+
+
+<!-- Build Tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<script>
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+</body>
+
+</html>
