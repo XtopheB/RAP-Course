@@ -37,13 +37,15 @@ mydata <- data.frame(name = c("John", "Sokol", "Chris"),
 
 ## Welcome 
 
-Welcome to the interactive tutorial designed for participants of the ***Subregional Training on Monitoring Financial Protection in Health***, to support their introduction to the R statistical software. This is an interactive tutorial that should help you verify that you and your computer are ready to use the materials developed for this course using R and RStudio.^[This document uses materials developed by *Garrick Aden-Buie, Barret Schloerke, JJ Allaire & Alexander Rossell Hayes* , the creators of the [learner](https://rstudio.github.io/learnr/) package. *This version is 2.3 (October 2023)*.]  
+Welcome to the interactive tutorial designed for participants of the ***Subregional training on Gender Statistics for Monitoring the Sustainable Development Goals (SDGs)***, to support their introduction to the R statistical software. This is an interactive tutorial that should help you verify that you and your computer are ready to use the materials developed for this course using R and RStudio.^[This document uses materials developed by *Garrick Aden-Buie, Barret Schloerke, JJ Allaire & Alexander Rossell Hayes* , the creators of the [learner](https://rstudio.github.io/learnr/) package. *This version is 2.4 (October 2023)*.]  
+
+>*Specifically, sessions 8, 9, and 10 of the subregional training will require the use of R software. As such, we strongly recommend that you complete this tutorial in preparation.* 
 
 ### Learning Objectives
 At the end of this tutorial you should be able to:   
 
 * Install R on your computer
-* Install the RStudio IDE
+* Install the RStudio IDE (*Integrated Development Environment*) 
 * Install the `tidyverse` R package
 * Run a few lines of R code
 
@@ -161,7 +163,7 @@ R has several functions that are loaded and available in the basic installation 
 > If your computer was a plane, we may think of the packages as all the components needed to fly (landing gear, gyroscope, lights, GPS, ... )   
 
 
-To see the list of packages that were loaded in the basic installation of RStudio, go the “Files/ Plots/ Packages and Help” pane and select the tab Packages. You can learn about the packages by searching the searching the packages by name in the Help tab.
+To see the list of packages that were loaded in the basic installation of RStudio, go the “Files/ Plots/ Packages and Help” pane and select the tab Packages. You can learn about the packages by searching the  packages by name in the Help tab.
    
 
 
