@@ -1,0 +1,13 @@
+name: LearnR-Tutorial
+title: LearnR-Tutorial
+username:
+account: xtophedataviz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10390934
+bundleId: 7880056
+url: https://xtophedataviz.shinyapps.io/LearnR-Tutorial/
+when: 1698885079.62934
+lastSyncTime: 1698885079.62935
+asMultiple: FALSE
+asStatic: FALSE
