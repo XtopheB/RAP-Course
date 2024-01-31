@@ -5,6 +5,8 @@ author: Christophe Bontemps (SIAP)^[Based on data and information from Vanuatu N
 subtitle: '*A simple report*'
 date: "2024-01-31"
 output:
+  word_document:
+    toc: yes
   pdf_document:
     df_print: kable
     toc: yes
@@ -12,8 +14,6 @@ output:
     fig_width: 6.5
     fig_height: 4
     extra_dependencies: float
-  word_document:
-    toc: yes
   html_document:
     df_print: paged
     toc: yes
@@ -109,9 +109,9 @@ flextable(CommodityByType)
 ```{r }
 # Plot the exports
 CommodityByType  %>%
-  ggplot(aes(x = reorder(Principle_Exports, total), y = (total/1000000))) +
+  ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +
     geom_bar(stat = "identity", color="black", fill= "lightsteelblue1", position=position_dodge()) +
-      labs( x= "Exports categories", y = "Vatu (millions)") +
+      labs( x= "Exports categories", y = "Vatu") +
   ggtitle(label = " Exports from Vanuatu [ 2000-2010] ",
           subtitle = "Vanuatu National Statistical Office")+
   coord_flip() +
@@ -121,15 +121,9 @@ CommodityByType  %>%
 
 
 
-```{r EXIT}
-knitr::knit_exit()
-```
-
-
-
 ##  Selection of the Year
 
-Imagine now the same report but for any year $ \in [2000, 2010]$
+Imagine now the same report but for any year in [2000, 2010]
 
 ```{r}
 MyYear <- 2003
@@ -144,16 +138,15 @@ MyYear <- 2003
 # Now only for a specific year
 CommodityByType_Year <- Mydata %>%
   filter(Year == MyYear) %>%
-  group_by(Principle.Exports) %>%
-  summarise(total = sum(Stat..Value)) %>%
+  group_by(Principle_Exports) %>%
+  summarise(total = sum(Stat_Value)) %>%
   arrange(desc(total))
 
-kable(CommodityByType_Year,
-      caption = paste("Exports from Vanuatu, year = ", MyYear)) %>% 
-  kable_styling()
+```
 
 
-
+```{r}
+flextable((CommodityByType_Year))
 ```
 
 
@@ -163,9 +156,9 @@ kable(CommodityByType_Year,
 
 # Plot the exports for the specific year
 CommodityByType_Year  %>%
-  ggplot(aes(x = reorder(Principle.Exports, total), y = (total/1000000))) +  
+  ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +  
     geom_bar(stat = "identity", color="white", fill= SIAP.color, position=position_dodge()) +
-      labs( x= "Exports categories", y = "Vatu (millions)") +
+      labs( x= "Exports categories", y = "Vatu") +
   ggtitle(label = paste("Exports from Vanuatu, year = ", MyYear),
           subtitle = "Vanuatu National Statistical Office")+
   coord_flip() +
@@ -173,6 +166,12 @@ CommodityByType_Year  %>%
 
 ```
 
+
+
+
+```{r EXIT}
+knitr::knit_exit()
+```
 
 
 
