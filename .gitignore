@@ -1,15 +1,12 @@
 # files
-
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 .Rproj
-
 # Maybe remove this
 .html
-
-
 # knitr and R markdown default cache directories
 *_cache/
 /cache/
+Rap-Intro.*
