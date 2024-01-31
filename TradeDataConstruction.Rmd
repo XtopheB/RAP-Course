@@ -1,0 +1,145 @@
+---
+title: "Trade Data Construction"
+author: "Christophe Bontemps"
+date: "2024-01-31"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    keep_md: yes
+    code_folding: show
+    fig_width: 6.5
+    fig_height: 4
+  pdf_document:
+    df_print: kable
+    toc: no
+    keep_tex: yes
+    fig_width: 6.5
+    fig_height: 4
+  word_document:
+    toc: yes
+---
+
+
+```{r setup, include=FALSE}
+# Set echo=FALSE as default for code cells
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE,
+                      dpi = 600)
+# My colors:
+SIAP.color <- "#0385a8"
+
+```
+
+
+```{r libraries, include = FALSE}
+#### Preparation ####
+
+# Load the required libraries
+library(dplyr) # Manipulating data
+library(stringr) # common string operations
+library(tidyverse) # Manipulating data
+
+# For tables 
+library(kableExtra)
+library(modelsummary)
+library(gt) 
+library(gtsummary)
+library(tinytable)
+
+
+ # to get tinytable library(remotes) install_github("vincentarelbundock/tinytable")
+```
+
+
+```{r data, include = FALSE}
+# # Note where VNSO code/data is on current computer
+# repository <- file.path(dirname(rstudioapi::getSourceEditorContext()$path), "Data")
+# setwd(repository) # Required for file.choose() function
+
+# Read in the raw trade data from secure folder of the repository 
+tradeStatsFile <- "VBoS_Dummy-Data_16.02.23.csv"
+tradeStats <- read.csv(paste0("Data/", tradeStatsFile), header=TRUE, na.strings=c("","NA", "NULL", "null")) #replace blank cells with missing values-NA
+```
+
+# Data used 
+We use some anaonyized data from Vanuatu National Statistical Office (VNSO) trade data.  and specifically used the file named  *`r tradeStatsFile`*, with  **`r nrow(tradeStats)`** observations on several goods exported.
+
+```{r preparation, include = FALSE}
+#### Clean and process the latest month's data ####
+
+# Initial re-formatting of the data
+
+# Remove duplicated rows from the trade statistics data
+duplicatedRows <- duplicated(tradeStats) 
+tradeStatsNoDup <- tradeStats[duplicatedRows == FALSE, ]
+
+# Convert the statistical value to numeric - note numbers formatted with commas in them and these need removed
+tradeStatsNoDup$Stat..Value <- as.numeric(gsub(",", "", tradeStatsNoDup$Stat..Value))
+
+# Convert excel figures to dates (choose)
+tradeStatsNoDup$Reg..Date <- as.Date(tradeStatsNoDup$Reg..Date, format = "%d/%m/%Y")
+
+# Create subset for Export and Import commodities 
+tradeStatsSubset <- tradeStatsNoDup[tradeStatsNoDup$Type %in% c("EX / 1","EX / 3", "IM / 4", "IM / 7"), ]
+tradeStatsCommodities <- tradeStatsSubset[tradeStatsSubset$CP4 %in% c(1000, 4000, 4071, 7100), ]
+```
+
+
+```{r NewVariables, include = FALSE}
+#### Extract the Year, Month, and Day as separate columns ####
+
+# Create new columns for dates
+tradeStatsCommodities$Year <- format(tradeStatsCommodities$Reg..Date, format= "%Y")
+tradeStatsCommodities$Month <- format(tradeStatsCommodities$Reg..Date, format= "%B")
+tradeStatsCommodities$Day <- format(tradeStatsCommodities$Reg..Date, format= "%d")
+
+#### Finish Processing ####
+
+# Make copy of latest month's processed data
+processedTradeStats <- tradeStatsCommodities
+```
+
+### Addition to the original file
+
+The dates and year are missing, so we'll generate the year to have some variabilty
+```{r}
+ processedTradeStats  <- processedTradeStats %>%
+  mutate (Year = as.integer(2000 + round(10*runif(nrow(.)), 0))   
+          )
+
+```
+
+In the original file, there are no **stat.values** but for the sake of the exercise we'll generated some. 
+
+```{r}
+## Parameters
+
+beta1 <- 0.5
+beta2 <- 2
+beta3 <-10
+
+ processedTradeStats  <- processedTradeStats %>%
+  mutate(
+    epsilon = rnorm(88,50,9),
+    Stat..Value =  round((beta1*CP4 + beta2 * as.numeric(as.factor(EXPORT.REGION))+ 
+      beta3 * as.numeric(as.factor(EXPORT.COUNTRY))* Year + epsilon * Year)/10^3, 2)
+  )
+
+```
+
+# Cleaning Variables names
+
+```{r}
+# Rename variables to remove dots and replace by "_"
+processedTradeStats <-  processedTradeStats %>%
+  rename_all(~ gsub("\\.+", "_", .))
+```
+
+
+
+```{r write, include = FALSE}
+# Create csv of last months processed data
+write.csv(processedTradeStats, "Data/TradeData.csv")
+
+```
