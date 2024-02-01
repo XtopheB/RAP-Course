@@ -1,0 +1,127 @@
+---
+title: "International Merchandise Trade Statistics Highlights"
+author: Christophe Bontemps (SIAP)
+subtitle: '*A simple report*'
+---
+
+
+```{r libraries, include = FALSE}
+# Load the required libraries
+
+# For manipulating data
+library(tidyverse)
+
+# For tables display
+library(flextable)
+
+```
+
+
+# Loading the data
+
+```{r}
+Mydata <- read.csv("Data/TradeData.csv")
+```
+
+
+# Statistics
+## Main Exports by type over the whole period
+
+### As a table
+
+```{r  }
+# Calculate total value by principle export type
+CommodityByType <- Mydata %>%
+  group_by(Principle_Exports) %>%
+  summarise(total = sum(Stat_Value)) %>%
+  arrange(desc(total))
+
+```
+
+```{r}
+# Table display
+# To reduce the homogenization efforts and the number of functions to be called, 
+# it is recommended to define formatting properties once and for all
+
+set_flextable_defaults(
+  font.size = 10,   table.layout = "autofit")
+
+# Printing the table
+flextable(CommodityByType)
+```
+
+ Or as a graphic: 
+
+```{r }
+# Plot the exports
+CommodityByType  %>%
+  ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +
+    geom_bar(stat = "identity", 
+             fill= "lightsteelblue1") +
+  labs(title ="Exports from Vanuatu [ 2000-2010] ", 
+       subtitle = "Vanuatu National Statistical Office", 
+       x= "Exports categories",
+       y = "Vatu") +
+  coord_flip() +
+  theme_minimal()
+
+```
+
+
+
+```{r EXIT}
+knitr::knit_exit()
+```
+
+
+
+
+##  Selection of the Year
+
+Imagine now the same report but for any year in [2000, 2010]
+
+```{r}
+MyYear <- 2003
+```
+
+| we have selected the year **`r MyYear`** let's see the report!
+
+
+### As a table
+
+```{r  }
+# Now only for a specific year
+CommodityByType_Year <- Mydata %>%
+  filter(Year == MyYear) %>%
+  group_by(Principle_Exports) %>%
+  summarise(total = sum(Stat_Value)) %>%
+  arrange(desc(total))
+
+```
+
+
+```{r}
+flextable(CommodityByType_Year)
+```
+
+
+ Or as a graphic: 
+
+```{r }
+# Plot the exports for the specific year
+CommodityByType_Year  %>%
+  ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +  
+    geom_bar(stat = "identity", color="white", fill= "lightsteelblue1") +
+      labs( x= "Exports categories", 
+            y = "Vatu", 
+            title = paste("Exports from Vanuatu, year = ", MyYear),
+            subtitle = "Vanuatu National Statistical Office") +
+  coord_flip() +
+  theme_minimal()
+
+```
+
+
+
+
+

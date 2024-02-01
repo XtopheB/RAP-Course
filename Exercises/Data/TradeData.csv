@@ -1,0 +1,89 @@
+"","Reg_Date","Type","CP4","Stat_Value","IMPORT_COUNTRY","IMPORT_REGION","EXPORT_COUNTRY","EXPORT_REGION","Principle_Exports","Principle_ReExports","Principle_Imports","Year","Month","Day","epsilon"
+"1",NA,"EX / 1",1000,409.04,"VANUATU","OCEANIA","PAPUA NEW GUINEA","OCEANIA","Beef","Other products ","Other Imports",2000,NA,NA,64.263652255601
+"2",NA,"EX / 1",1000,112.58,"VANUATU","OCEANIA","AUSTRALIA","OCEANIA","Coffee","Other products ","Other Imports",2008,NA,NA,45.8115904122461
+"3",NA,"IM / 4",4000,113.91,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Coffee","Other products ","Other Imports",2000,NA,NA,45.9533163297906
+"4",NA,"IM / 4",4000,202.52,"FIJI","OCEANIA","FIJI","OCEANIA","Coffee","Other products ","Other Imports",2002,NA,NA,60.1573802632163
+"6",NA,"IM / 4",4000,345.47,"NEW ZEALAND","OCEANIA","NEW ZEALAND","OCEANIA","Coffee","Other products ","Other Imports",2006,NA,NA,41.2153980215615
+"10",NA,"IM / 4",4000,336.26,"MALAYSIA","ASIA","MALAYSIA","ASIA","Coffee","Other products ","Other Imports",2008,NA,NA,66.4615750130069
+"11",NA,"IM / 4",4000,230.03,"GERMANY","EUROPE","GERMANY","EUROPE","Coffee","Other products ","Other Imports",2003,NA,NA,53.8407413511457
+"17",NA,"IM / 4",4000,167.25,"CHINA, PEOPLES REPUBLIC OF","ASIA","CHINA, PEOPLES REPUBLIC OF","ASIA","Vanilla","Other products ","Other Imports",2009,NA,NA,52.2543548266694
+"18",NA,"EX / 1",1000,148.9,"VANUATU","OCEANIA","BANGLADESH","ASIA","Copra","Other products ","Other Imports",2005,NA,NA,54.0144513172576
+"19",NA,"EX / 1",1000,343.34,"VANUATU","OCEANIA","NEW CALEDONIA","OCEANIA","Kava","Other products ","Other Imports",2007,NA,NA,50.819544777926
+"21",NA,"EX / 1",1000,175.06,"VANUATU","OCEANIA","FIJI","OCEANIA","Kava","Other products ","Other Imports",2010,NA,NA,46.8411725598915
+"22",NA,"EX / 1",1000,443.13,"VANUATU","OCEANIA","UNITED STATES OF AMERICA","AMERICAS","Kava","Other products ","Other Imports",2001,NA,NA,51.2055152515797
+"30",NA,"EX / 1",1000,124.99,"VANUATU","OCEANIA","AUSTRALIA","OCEANIA","Kava","Other products ","Other Imports",2008,NA,NA,51.9914190450225
+"31",NA,"EX / 1",1000,362.1,"VANUATU","OCEANIA","NEW ZEALAND","OCEANIA","Kava","Other products ","Other Imports",2002,NA,NA,50.6167030380255
+"37",NA,"EX / 1",1000,274.63,"VANUATU","OCEANIA","KIRIBATI","OCEANIA","Kava","Other products ","Other Imports",2004,NA,NA,46.7869420028902
+"40",NA,"IM / 4",4000,345.38,"NEW ZEALAND","OCEANIA","NEW ZEALAND","OCEANIA","Kava","Other products ","Other Imports",2003,NA,NA,41.426921772013
+"45",NA,"IM / 4",4000,138.82,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Kava","Other products ","Other Imports",2000,NA,NA,58.4061012266339
+"54",NA,"IM / 4",4000,337.08,"NEW CALEDONIA","OCEANIA","NEW CALEDONIA","OCEANIA","Kava","Other products ","Other Imports",2001,NA,NA,47.4533677993303
+"73",NA,"EX / 1",1000,155.14,"VANUATU","OCEANIA","CHINA, PEOPLES REPUBLIC OF","ASIA","Kava","Other products ","Other Imports",2008,NA,NA,47.0086155912666
+"77",NA,"EX / 1",1000,404.34,"VANUATU","OCEANIA","SINGAPORE","ASIA","Coconut Oil","Other products ","Other Imports",2009,NA,NA,41.0138876350591
+"78",NA,"IM / 4",4000,195.35,"FIJI","OCEANIA","FIJI","OCEANIA","Coconut Oil","Other products ","Other Imports",2004,NA,NA,56.4761298544167
+"79",NA,"IM / 4",4000,451.8,"UNITED STATES OF AMERICA","AMERICAS","UNITED STATES OF AMERICA","AMERICAS","Coconut Oil","Other products ","Other Imports",2007,NA,NA,54.1156711784117
+"80",NA,"EX / 1",1000,285.23,"VANUATU","OCEANIA","INDONESIA","ASIA","Cocoa","Other products ","Other Imports",2007,NA,NA,61.8677375005727
+"81",NA,"EX / 1",1000,300.75,"VANUATU","OCEANIA","MALAYSIA","ASIA","Cocoa","Other products ","Other Imports",2008,NA,NA,49.5251563020241
+"83",NA,"EX / 1",1000,371.58,"VANUATU","OCEANIA","NEW CALEDONIA","OCEANIA","Cocoa","Other products ","Other Imports",2006,NA,NA,64.9791126642179
+"84",NA,"IM / 4",4000,335.94,"NEW ZEALAND","OCEANIA","NEW ZEALAND","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2003,NA,NA,36.7152143727043
+"85",NA,"IM / 4",4071,98.9,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,38.2335152144482
+"86",NA,"IM / 4",4071,453.96,"NEW CALEDONIA","OCEANIA","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2002,NA,NA,45.7292967754943
+"91",NA,"IM / 4",4000,139.33,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,58.3867813543735
+"93",NA,"IM / 4",4071,463.32,"AUSTRALIA","OCEANIA","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2005,NA,NA,50.0643457027766
+"94",NA,"IM / 7",7100,400.94,"NEW ZEALAND","OCEANIA","NEW ZEALAND","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2004,NA,NA,68.2932479533993
+"96",NA,"IM / 4",4000,238.62,"GERMANY","EUROPE","GERMANY","EUROPE","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2004,NA,NA,58.0703984282231
+"97",NA,"IM / 4",4071,347.33,"MEXICO","AMERICAS","MEXICO","AMERICAS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,61.9575038011295
+"98",NA,"IM / 7",7100,369.66,"NETHERLANDS","EUROPE","NEW ZEALAND","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2006,NA,NA,52.5048424429218
+"100",NA,"IM / 4",4000,307.6,"NETHERLANDS","EUROPE","NEW ZEALAND","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2010,NA,NA,22.0379198090115
+"101",NA,"IM / 7",7100,297.43,"MEXICO","AMERICAS","MEXICO","AMERICAS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2006,NA,NA,36.4998208165679
+"104",NA,"IM / 4",4071,421.72,"MEXICO","AMERICAS","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2004,NA,NA,29.4190810894692
+"109",NA,"IM / 4",4071,473.61,"FRANCE","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2007,NA,NA,54.9598081574396
+"116",NA,"IM / 4",4071,451.03,"ITALY","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2002,NA,NA,44.2679903314981
+"126",NA,"IM / 4",4071,489.58,"NEW ZEALAND","OCEANIA","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2007,NA,NA,62.9172794268732
+"139",NA,"IM / 7",7100,119.89,"ITALY","EUROPE","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2005,NA,NA,48.0199773833509
+"142",NA,"IM / 7",7100,205.27,"FRANCE","EUROPE","FRANCE","EUROPE","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2006,NA,NA,50.5568324079177
+"155",NA,"IM / 7",7100,465.3,"FRANCE","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2001,NA,NA,50.7550939195573
+"156",NA,"IM / 4",4000,155,"FIJI","OCEANIA","FIJI","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2006,NA,NA,36.2674490570687
+"164",NA,"IM / 7",7100,156.97,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2003,NA,NA,66.5890084095065
+"166",NA,"IM / 4",4071,115.63,"NETHERLANDS","EUROPE","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,46.5687075782223
+"193",NA,"IM / 7",7100,308.57,"FRANCE","EUROPE","NEW CALEDONIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2009,NA,NA,31.8249155479427
+"259",NA,"IM / 4",4071,476.45,"PORTUGAL","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2005,NA,NA,56.6116133796978
+"264",NA,"IM / 4",4071,483.82,"UNITED KINGDOM","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,59.9261978294112
+"275",NA,"IM / 4",4071,444.93,"ARGENTINA","AMERICAS","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2001,NA,NA,41.3334534290179
+"337",NA,"IM / 4",4000,179.52,"FRANCE","EUROPE","FRANCE","EUROPE","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2003,NA,NA,38.6263885023435
+"367",NA,"IM / 4",4000,349.47,"FRANCE","EUROPE","NEW CALEDONIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2007,NA,NA,53.1247346246171
+"430",NA,"IM / 4",4071,110.21,"NEW ZEALAND","OCEANIA","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2001,NA,NA,44.0573038757223
+"445",NA,"IM / 4",4071,468.77,"JAPAN","ASIA","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2006,NA,NA,52.6625123945367
+"454",NA,"IM / 4",4000,121.04,"FRANCE","EUROPE","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,49.2805519062747
+"476",NA,"IM / 7",7100,144.6,"FRANCE","EUROPE","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2010,NA,NA,60.1714949649369
+"477",NA,"IM / 4",4000,378.95,"PHILIPPINES","ASIA","PHILIPPINES","ASIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,37.7231494366476
+"479",NA,"IM / 4",4071,481.96,"UNITED STATES OF AMERICA","AMERICAS","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,59.000399330187
+"497",NA,"IM / 7",7100,447.25,"UNITED KINGDOM","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2007,NA,NA,41.0732366022593
+"502",NA,"IM / 4",4071,482.28,"CANADA","AMERICAS","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,59.1619403660677
+"514",NA,"IM / 4",4000,101.97,"UNITED KINGDOM","EUROPE","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2006,NA,NA,39.8299333628866
+"526",NA,"IM / 7",7100,123.56,"UNITED KINGDOM","EUROPE","AUSTRALIA","OCEANIA","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2006,NA,NA,49.8235410979792
+"643",NA,"IM / 4",4071,479.28,"CUBA","AMERICAS","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2008,NA,NA,57.6681812778572
+"718",NA,"IM / 4",4071,472.02,"BERMUDA","AMERICAS","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2009,NA,NA,53.9351474828164
+"728",NA,"IM / 4",4071,466.78,"SWEDEN","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2001,NA,NA,52.2500976037168
+"729",NA,"IM / 4",4071,466.82,"RUSSIA","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2001,NA,NA,52.2730864935252
+"804",NA,"IM / 4",4071,437.13,"IRELAND","EUROPE","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2001,NA,NA,37.4315720157034
+"831",NA,"IM / 7",7100,483.49,"VARIOUS","VARIOUS","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2009,NA,NA,58.8880243679621
+"845",NA,"IM / 4",4071,492.82,"SOUTH AFRICA","AFRICA","VARIOUS","VARIOUS","Alcoholic Drinks","Alcoholic Drinks","Alcoholic drinks",2005,NA,NA,64.7775061889824
+"903",NA,"IM / 4",4000,141.75,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Cowhides","Other products ","Other Imports",2009,NA,NA,59.559929893907
+"904",NA,"EX / 1",1000,105.71,"VANUATU","OCEANIA","AUSTRALIA","OCEANIA","Cowhides","Other products ","Other Imports",2000,NA,NA,42.6000514503794
+"905",NA,"EX / 1",1000,141.16,"VANUATU","OCEANIA","CHINA, PEOPLES REPUBLIC OF","ASIA","Wood","Other products ","Other Imports",2004,NA,NA,40.1891796028875
+"908",NA,"IM / 4",4000,109.35,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Wood","Other products ","Other Imports",2009,NA,NA,43.4284267908167
+"910",NA,"IM / 4",4000,342.34,"NEW ZEALAND","OCEANIA","NEW ZEALAND","OCEANIA","Wood","Other products ","Wood sawn",2004,NA,NA,39.8274505722711
+"915",NA,"IM / 4",4000,146.25,"AUSTRALIA","OCEANIA","AUSTRALIA","OCEANIA","Wood","Other products ","Wood sawn",2007,NA,NA,61.8703989370857
+"920",NA,"EX / 1",1000,160.47,"VANUATU","OCEANIA","AUSTRALIA","OCEANIA","Wood","Other products ","Wood sawn",2006,NA,NA,69.7396192829187
+"922",NA,"EX / 1",1000,171.29,"VANUATU","OCEANIA","CHINA, PEOPLES REPUBLIC OF","ASIA","Wood","Other products ","Wood sawn",2000,NA,NA,55.3948044756352
+"923",NA,"EX / 1",1000,172.34,"NEW CALEDONIA","OCEANIA","CHINA, PEOPLES REPUBLIC OF","ASIA","Wood","Other products ","Wood sawn",2003,NA,NA,55.7874430412011
+"928",NA,"IM / 4",4000,382.66,"THAILAND","ASIA","NEW ZEALAND","OCEANIA","Wood","Other products ","Other Imports",2008,NA,NA,59.5654944604559
+"931",NA,"IM / 4",4000,166.84,"CHINA, PEOPLES REPUBLIC OF","ASIA","CHINA, PEOPLES REPUBLIC OF","ASIA","Wood","Other products ","Other Imports",2005,NA,NA,52.2119075670965
+"933",NA,"IM / 4",4000,383.42,"NEW ZEALAND","OCEANIA","NEW ZEALAND","OCEANIA","Wood","Other products ","Other Imports",2001,NA,NA,60.6122167686868
+"936",NA,"IM / 4",4000,364.01,"CHINA, PEOPLES REPUBLIC OF","ASIA","NEW ZEALAND","OCEANIA","Wood","Other products ","Other Imports",2008,NA,NA,50.2778642072481
+"939",NA,"IM / 4",4000,257.95,"HONG KONG","ASIA","HONG KONG","ASIA","Wood","Other products ","Other Imports",2009,NA,NA,57.402151227724
+"944",NA,"IM / 4",4000,235.95,"GERMANY","EUROPE","GERMANY","EUROPE","Wood","Other products ","Other Imports",2004,NA,NA,56.7408078692305
+"946",NA,"IM / 4",4000,366.85,"NEW CALEDONIA","OCEANIA","NEW CALEDONIA","OCEANIA","Wood","Other products ","Other Imports",2005,NA,NA,61.9664817083314
+"947",NA,"IM / 4",4071,487.5,"CHINA, PEOPLES REPUBLIC OF","ASIA","VARIOUS","VARIOUS","Wood","Other products ","Other Imports",2006,NA,NA,62.000653835549
+"948",NA,"IM / 4",4071,445.6,"AUSTRALIA","OCEANIA","VARIOUS","VARIOUS","Wood","Other products ","Other Imports",2002,NA,NA,41.555767335725
+"952",NA,"IM / 4",4000,431.29,"UNITED STATES OF AMERICA","AMERICAS","UNITED STATES OF AMERICA","AMERICAS","Wood","Other products ","Other Imports",2001,NA,NA,44.5387264738167

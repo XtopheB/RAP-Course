@@ -1,0 +1,14 @@
+name: Tuto-Install-R
+title: Tuto-Install-R
+username:
+account: xtophedataviz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6727921
+bundleId: 6161335
+url: https://xtophedataviz.shinyapps.io/Tuto-Install-R/
+when: 1659523529.11523
+lastSyncTime: 1659523529.11523
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: css/custom.css|images/FundamentalPrinciplesOS.PNG|images/RAP1-1-WhatisRAP-2.gif|images/RAP1-1-WhatisRAP.gif|Rap-Intro.html|Rap-Intro.pdf|Rap-Intro.Rmd|README.md
