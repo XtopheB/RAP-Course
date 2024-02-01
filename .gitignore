@@ -4,9 +4,14 @@
 .RData
 .Ruserdata
 .Rproj
-# Maybe remove this
+# Also, files created from knitr
 .html
+.tex
+.log
+.md
+
 # knitr and R markdown default cache directories
 *_cache/
 /cache/
 Rap-Intro.*
+

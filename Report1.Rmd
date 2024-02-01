@@ -5,6 +5,12 @@ author: Christophe Bontemps (SIAP)^[Based on data and information from Vanuatu N
 subtitle: '*A simple report*'
 date: "2024-01-31"
 output:
+  pdf_document:
+    toc: yes
+    keep_tex: yes
+    fig_width: 6.5
+    fig_height: 4
+    extra_dependencies: float
   html_document:
     df_print: paged
     toc: yes
@@ -12,13 +18,6 @@ output:
     code_folding: show
     fig_width: 6.5
     fig_height: 4
-  pdf_document:
-    df_print: kable
-    toc: yes
-    keep_tex: yes
-    fig_width: 6.5
-    fig_height: 4
-    extra_dependencies: float
   word_document:
     toc: yes
 ---
@@ -94,8 +93,9 @@ flextable(CommodityByType)
 ```{r }
 # Plot the exports
 CommodityByType  %>%
-  ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +
-    geom_bar(stat = "identity", 
+  ggplot()+
+  aes(x = reorder(Principle_Exports, total), y = (total)) +
+  geom_bar(stat = "identity", 
              fill= "lightsteelblue1") +
   labs(title ="Exports from Vanuatu [ 2000-2010] ", 
        subtitle = "Vanuatu National Statistical Office", 
@@ -142,12 +142,13 @@ flextable(CommodityByType_Year)
 ```{r }
 # Plot the exports for the specific year
 CommodityByType_Year  %>%
-  ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +  
-    geom_bar(stat = "identity", color="white", fill= "lightsteelblue1") +
-      labs( x= "Exports categories", 
-            y = "Vatu", 
-            title = paste("Exports from Vanuatu, year = ", MyYear),
-            subtitle = "Vanuatu National Statistical Office") +
+  ggplot()+
+  aes(x = reorder(Principle_Exports, total), y = (total)) +  
+  geom_bar(stat = "identity", color="white", fill= "lightsteelblue1") +
+  abs( x= "Exports categories", 
+       y = "Vatu", 
+       title = paste("Exports from Vanuatu, year = ", MyYear),
+       subtitle = "Vanuatu National Statistical Office") +
   coord_flip() +
   theme_minimal()
 
