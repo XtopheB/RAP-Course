@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "My first report"
 author: "Christophe Bontemps"
 date: "2024-02-02"
 output: word_document
@@ -9,22 +9,26 @@ output: word_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# R Markdown
+This is my *first* report using **Rmarkdown**. I will use a different data set:
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+* First we load the data
+* second we print a summary
 
-```{r cars}
-summary(cars)
+```{r}
+Mydata <- read.csv("Data/TradeData.csv")
 ```
 
-## Including Plots
+I have **here  `r  nrow(Mydata)`  observations**
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+nrow(Mydata)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### Summary statistics
+
+```{r }
+summary(Mydata$Stat_Value)
+```
