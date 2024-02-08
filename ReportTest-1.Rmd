@@ -13,6 +13,18 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Loading libraries
+
+```{r loadinglibraires, include=FALSE}
+# Load the required libraries
+
+# For manipulating data
+library(tidyverse)
+
+# For tables display
+library(flextable)
+```
+
 
 # R Markdown
 This is my *first* report using **Rmarkdown**. I will use a different data set:
@@ -36,6 +48,47 @@ nrow(Mydata)
 summary(Mydata$Stat_Value)
 ```
 
+## Data Manipulation
+
+```{r CommodityByType}
+# Calculate total value by principle export type
+CommodityByType <- Mydata %>%
+  group_by(Principle_Exports) %>%
+  summarise(total = sum(Stat_Value)) %>%
+  arrange(desc(total))
+```
+
+Here this are the principle exports by type
+
+```{r TableCommodityByType}
+# Table display
+# To reduce the homogenization efforts and the number of functions to be called, 
+# it is recommended to define formatting properties once and for all
+
+set_flextable_defaults(
+  font.size = 10,   table.layout = "autofit")
+
+# Printing the table
+flextable(CommodityByType)
+```
+
+## Graphic
+
+```{r}
+# Plot the exports
+p <-CommodityByType  %>%
+  ggplot()+
+    aes(x = reorder(Principle_Exports, total), y = (total)) +
+  geom_bar(stat = "identity", 
+             fill= "lightsteelblue1") +
+  labs(title ="Exports from Vanuatu [ 2000-2010] ", 
+       subtitle = "Vanuatu National Statistical Office", 
+       x= "Exports categories",
+       y = "Vatu") +
+  coord_flip() +
+  theme_minimal()
+p
+```
 
 
 
