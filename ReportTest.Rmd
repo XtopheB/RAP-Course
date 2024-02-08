@@ -2,7 +2,16 @@
 title: "My first report"
 author: "Christophe Bontemps"
 date: "2024-02-02"
-output: word_document
+output:
+  word_document:
+    toc: yes
+  html_document:
+    toc: yes
+    code_folding: show
+    toc_float: true
+    df_print: paged
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
