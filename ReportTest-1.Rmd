@@ -89,7 +89,7 @@ p <-CommodityByType  %>%
   theme_minimal()
 p
 ```
-
+   
 
 
 
