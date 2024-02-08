@@ -1,0 +1,117 @@
+---
+title: "My first report"
+subtitle: " Interactive document"
+author: "Christophe Bontemps"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: yes
+    code_folding: show
+    toc_float: true
+    df_print: paged
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Loading libraries
+
+```{r loadinglibraires, include=FALSE}
+# Load the required libraries
+
+# For manipulating data
+library(tidyverse)
+
+# For tables display
+library(flextable)
+```
+
+
+
+# R Markdown
+This is my *first* report using **Rmarkdown**. I will use a different data set:
+
+* First we load the data
+* second we print a summary
+
+```{r TradeDataLoading, echo=FALSE}
+Mydata <- read.csv("Data/TradeData.csv")
+```
+
+## Number of rows
+I have **here  `r  nrow(Mydata)`  observations**
+
+```{r}
+nrow(Mydata)
+```
+
+### Summary statistics
+
+```{r }
+summary(Mydata$Stat_Value)
+```
+## Data Manipulation
+
+```{r CommodityByType}
+# Calculate total value by principle export type
+CommodityByType <- Mydata %>%
+  group_by(Principle_Exports) %>%
+  summarise(total = sum(Stat_Value)) %>%
+  arrange(desc(total))
+```
+
+Here this are the principle exports by type
+
+```{r TableCommodityByType}
+# Table display
+# To reduce the homogenization efforts and the number of functions to be called, 
+# it is recommended to define formatting properties once and for all
+
+set_flextable_defaults(
+  font.size = 10,   table.layout = "autofit")
+
+# Printing the table
+flextable(CommodityByType)
+```
+
+## Graphic
+
+```{r}
+# Plot the exports
+p <-CommodityByType  %>%
+  ggplot()+
+    aes(x = reorder(Principle_Exports, total), y = (total)) +
+  geom_bar(stat = "identity", 
+             fill= "lightsteelblue1") +
+  labs(title ="Exports from Vanuatu [ 2000-2010] ", 
+       subtitle = "Vanuatu National Statistical Office", 
+       x= "Exports categories",
+       y = "Vatu") +
+  coord_flip() +
+  theme_minimal()
+p
+```
+
+
+```{r, include = FALSE}
+library(plotly)
+```
+
+## Interactive version of the plot
+
+```{r}
+ggplotly(p)
+```
+
+
+
+
+
+
+
+
