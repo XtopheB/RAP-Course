@@ -1,17 +1,25 @@
 # files
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-.Rproj
+*.Rproj.user
+*.Rhistory
+*.RData
+*.Ruserdata
+*.Rproj
 # Also, files created from knitr
-.html
-.tex
-.log
-.md
-
+*.md
 # knitr and R markdown default cache directories
 *_cache/
 /cache/
 Rap-Intro.*
-
+*.html
+*.tex
+*.docx
+*.pdf
+*.zip
+Data
+DummyCode_buildMonthlyReport_files
+InteractiveRLesson1_data
+Output
+Tuto-Install-R_data
+.Rproj.user
+.html
+Tuto-Install-R.html
