@@ -1,0 +1,249 @@
+---
+title: "International Merchandise Trade Statistics Highlights"
+author: Christophe Bontemps (SIAP)^[Based on data and information from Vanuatu National
+  Statistical Office (VNSO) ]
+subtitle: '*A toy model!*'
+output:
+  word_document:
+    toc: yes
+  html_document:
+    df_print: paged
+    toc: yes
+    keep_md: yes
+    code_folding: show
+    fig_width: 6.5
+    fig_height: 4
+  pdf_document:
+    df_print: kable
+    toc: no
+    keep_tex: yes
+    fig_width: 6.5
+    fig_height: 4
+---
+
+
+```{r setup, include=FALSE}
+# Set echo=FALSE as default for code cells
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE,
+                      dpi = 600)
+# My colors:
+SIAP.color <- "#0385a8"
+
+```
+
+
+```{r libraries, include = FALSE}
+#### Preparation ####
+
+# Load the required libraries
+library(dplyr) # Manipulating data
+library(stringr) # common string operations
+library(tidyverse) # Manipulating data
+
+# For tables 
+library(kableExtra)
+library(modelsummary)
+library(gt) 
+library(gtsummary)
+library(tinytable)
+
+
+ # to get tinytable library(remotes) install_github("vincentarelbundock/tinytable")
+```
+
+
+```{r data, include = FALSE}
+# # Note where VNSO code/data is on current computer
+# repository <- file.path(dirname(rstudioapi::getSourceEditorContext()$path), "Data")
+# setwd(repository) # Required for file.choose() function
+
+# Read in the raw trade data from secure folder of the repository 
+tradeStatsFile <- "VBoS_Dummy-Data_16.02.23.csv"
+tradeStats <- read.csv(paste0("Data/", tradeStatsFile), header=TRUE, na.strings=c("","NA", "NULL", "null")) #replace blank cells with missing values-NA
+```
+
+# Data used 
+We use some anaonyized data from Vanuatu National Statistical Office (VNSO) trade data.  and specifically used the file named  *`r tradeStatsFile`*, with  **`r nrow(tradeStats)`** observations on several goods exported.
+
+```{r preparation, include = FALSE}
+#### Clean and process the latest month's data ####
+
+# Initial re-formatting of the data
+
+# Remove duplicated rows from the trade statistics data
+duplicatedRows <- duplicated(tradeStats) 
+tradeStatsNoDup <- tradeStats[duplicatedRows == FALSE, ]
+
+# Convert the statistical value to numeric - note numbers formatted with commas in them and these need removed
+tradeStatsNoDup$Stat..Value <- as.numeric(gsub(",", "", tradeStatsNoDup$Stat..Value))
+
+# Convert excel figures to dates (choose)
+tradeStatsNoDup$Reg..Date <- as.Date(tradeStatsNoDup$Reg..Date, format = "%d/%m/%Y")
+
+# Create subset for Export and Import commodities 
+tradeStatsSubset <- tradeStatsNoDup[tradeStatsNoDup$Type %in% c("EX / 1","EX / 3", "IM / 4", "IM / 7"), ]
+tradeStatsCommodities <- tradeStatsSubset[tradeStatsSubset$CP4 %in% c(1000, 4000, 4071, 7100), ]
+```
+
+
+```{r NewVariables, include = FALSE}
+#### Extract the Year, Month, and Day as separate columns ####
+
+# Create new columns for dates
+tradeStatsCommodities$Year <- format(tradeStatsCommodities$Reg..Date, format= "%Y")
+tradeStatsCommodities$Month <- format(tradeStatsCommodities$Reg..Date, format= "%B")
+tradeStatsCommodities$Day <- format(tradeStatsCommodities$Reg..Date, format= "%d")
+
+#### Finish Processing ####
+
+# Make copy of latest month's processed data
+processedTradeStats <- tradeStatsCommodities
+
+# Create csv of last months processed data
+write.csv(processedTradeStats, "Output/OUT_PROC_ASY_ProcessedRawData_Date.csv")
+
+```
+
+```{r, eval=TRUE}
+head(processedTradeStats)
+```
+
+
+### Addition to the original file
+
+The dates and year are missing, so we'll generate the year to have some variabilty
+```{r}
+ processedTradeStats  <- processedTradeStats %>%
+  mutate (Year = as.integer(2000 + round(10*runif(nrow(.)), 0))   
+          )
+
+```
+
+
+
+
+In the original file, there are no **stat.values** but for the sake of the exercise we'll generated some. 
+
+```{r}
+## Parameters
+
+beta1 <- 0.5
+beta2 <- 2
+beta3 <-10
+
+ processedTradeStats  <- processedTradeStats %>%
+  mutate(
+    epsilon = rnorm(88,50,9),
+    Stat..Value =  beta1*CP4 + beta2 * as.numeric(as.factor(EXPORT.REGION))+ 
+      beta3 * as.numeric(as.factor(EXPORT.COUNTRY))* Year + epsilon * Year
+  )
+
+```
+
+In a classical linear model,
+$$
+ stat.value  =  \beta_1 * Var1 +  \beta_2 * Var_2 +  \beta_3 * Var_3 + \epsilon
+$$
+
+The *stats.value* was generated with the following parameters $\beta_1$ = `r beta2` and  $\beta_2$ = `r beta3`, wich leads to:  
+
+$$
+ stat.value  =  `r beta1` * CP4 + `r beta2` * 1_[export region] + `r beta3` * 1_[export country] + \epsilon
+$$
+
+# Statistics
+Now let's look at our constructed data set and start exploring: 
+```{r, eval=FALSE}
+head(processedTradeStats)
+```
+... and let's have some **descriptive statistics**
+```{r}
+datasummary_skim(processedTradeStats, type = "numeric")
+```
+
+
+
+## Main Exports over the whole period
+
+### As a table
+
+```{r  }
+# Calculate total statistical value by principle export type
+totalCommodityValueByPrincipleExportType <- processedTradeStats %>%
+  group_by(Principle.Exports) %>%
+  summarise(total = sum(Stat..Value)) %>%
+  arrange(desc(total))
+
+kable(totalCommodityValueByPrincipleExportType, caption = "Exports from Vanuatu [ 2000-2010].") %>% 
+  kable_styling() 
+
+```
+
+
+ Or as a graphic: 
+
+```{r }
+# Plot the exports
+totalCommodityValueByPrincipleExportType  %>%
+  ggplot(aes(x = reorder(Principle.Exports, total), y = (total/1000000))) +
+    geom_bar(stat = "identity", color="black", fill= "lightsteelblue1", position=position_dodge()) +
+      labs( x= "Exports categories", y = "Vatu (millions)") +
+  ggtitle(label = " Exports from Vanuatu [ 2000-2010] ",
+          subtitle = "Vanuatu National Statistical Office")+
+  coord_flip() +
+  theme_minimal()
+
+```
+
+##  Selection of the Year
+
+Imagine now the same report but for any year $ \in [2000, 2010]$
+
+```{r}
+MyYear <- 2003
+```
+
+| we have selected the year **`r MyYear`** let's see the report!
+
+
+### As a table
+
+```{r  }
+# Now only for a specific year
+NewtotalCommodityValueByPrincipleExportType <- processedTradeStats %>%
+  filter(Year == MyYear) %>%
+  group_by(Principle.Exports) %>%
+  summarise(total = sum(Stat..Value)) %>%
+  arrange(desc(total))
+
+kable(NewtotalCommodityValueByPrincipleExportType,
+      caption = paste("Exports from Vanuatu, year = ", MyYear)) %>% 
+  kable_styling()
+
+
+
+```
+
+
+ Or as a graphic: 
+
+```{r }
+
+# Plot the exports for the specific year
+NewtotalCommodityValueByPrincipleExportType  %>%
+  ggplot(aes(x = reorder(Principle.Exports, total), y = (total/1000000))) +  
+    geom_bar(stat = "identity", color="white", fill= SIAP.color, position=position_dodge()) +
+      labs( x= "Exports categories", y = "Vatu (millions)") +
+  ggtitle(label = paste("Exports from Vanuatu, year = ", MyYear),
+          subtitle = "Vanuatu National Statistical Office")+
+  coord_flip() +
+  theme_minimal()
+
+```
+
+
+
+
+
+
