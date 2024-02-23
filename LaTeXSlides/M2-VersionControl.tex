@@ -1,0 +1,369 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress, handhouts, aspectratio=169]{beamer}
+%% General document
+\usepackage{graphicx, subfig}
+%% Beamer Layout
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{palatino}
+
+%%%%%%% Mes Packages %%%%%%%%%%%%%%%%
+%\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{dsfont} % Pour indicatrice
+\usepackage{url}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}   % For strike out text
+
+% Natbib for clean bibliography
+\usepackage[comma,authoryear]{natbib}
+
+%remove the icon
+\setbeamertemplate{bibliography item}{}
+
+%remove line breaks
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+
+%% ------ MEs couleurs --------
+\definecolor{vert}{rgb}{0.1,0.7,0.2}
+\definecolor{brique}{rgb}{0.7,0.16,0.16}
+\definecolor{gris}{rgb}{0.7, 0.75, 0.71}
+\definecolor{twitterblue}{rgb}{0, 0.42, 0.58}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+\definecolor{siap}{RGB}{3,133, 200}
+
+
+%%%%%%%%%%%%%%%%% BEAMER PACKAGE %%%%%%%
+
+\setbeamercolor{itemize item}{fg=siap}
+%\setbeamercolor{itemize subitem}{fg=blue}
+%\setbeamercolor{itemize subsubitem}{fg=cyan}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape}
+
+\setbeamercolor*{lower separation line head}{bg=DeepSkyBlue4}
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=siap}
+\setbeamercolor*{example text}{fg=black}
+\setbeamercolor*{structure}{fg=black}
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10}
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10}
+
+% Set the header color to SIAP's color
+\setbeamercolor*{frametitle}{fg=siap}
+
+%remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+%% Add footer with logo
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,%
+    leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}
+    \includegraphics[height=4ex]{SIAP_logo_Big.png}\hfill
+    \insertshortauthor\hfill\insertshorttitle\hfill  \textcolor{siap}{\textit{\insertframenumber}}
+  \end{beamercolorbox}%
+}
+
+% Path for the graphs
+\graphicspath{
+{Graphics/}
+{c:/Chris/UN-ESCAP/SIAP-E-learning/Resources/OpenScience/}
+{c:/Chris/Visualisation/Presentations/Graphics/}
+{c:/Chris/Visualisation/Presentations/Graphics/SIAP/}
+{c:/Chris/Visualisation/Presentations/Graphics/Lies/}
+{c:/Chris/Visualisation/Presentations/Graphics/Maps/}
+{c:/Chris/Visualisation/Presentations/Graphics/RGenerated/}
+{c:/Chris/Visualisation/Presentations/Graphics/Logos/}
+{c:/Gitmain/MLCourse/UNML/Module0/M0_files/figure-html/}
+{c:/Chris/UN-ESCAP/MyCourses2022/MLOS2022/Slides/Graphics/}
+{c:/Chris/UN-ESCAP/MyCourses2023/RAP/Slides/Graphics/}
+{c:/GitMain/RAP/RAP-Course/images/}
+{c:/Chris/UN-ESCAP/MyCourses2022/MLOS2022/Slides/Graphics/}
+% Path for specific graphs created
+ {../R-Codes/JobSatisfaction_files/figure-latex/}
+ {../R-Codes/Unused_files/figure-latex/}
+ }
+
+
+\title[\textcolor{siap}{Principles of RAP}]{\textcolor{siap}{Principles of \\ Reproducible Analytical Pipelines \\}
+\vspace{0.55cm} \textcolor{brique}{Version Control}}
+\author{Christophe Bontemps}
+\institute{\large{\emph{Statistical Institute for Asia and the Pacific} } \\
+    \includegraphics[height=10ex]{SIAP_logo_Big.png}}
+\date{}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AI %%%%%%
+
+\section{What is Version Control?}
+
+\begin{frame} % Cover slide
+\frametitle{Version Control keeps tracks of your work}
+Tracking three \textbf{W} questions:
+\begin{columns}[t]
+ \begin{column}{0.5\textwidth}
+ \begin{itemize}[<+->]
+ \item[] \textcolor{siap}{\textbf{W}}hich changes?
+ \item[] \textcolor{siap}{\textbf{W}}ho changed it?
+ \item[] \textcolor{siap}{\textbf{W}}hen was the change?
+ \end{itemize}
+ \end{column}
+  \begin{column}{0.5\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-4>{ \includegraphics[width=0.95\textwidth]{FileHistory.PNG} \\  }
+       \only<1-4>{\hfill  \textcolor{gris}{\tiny{Source: \href{https://the-turing-way.netlify.app/reproducible-research/vcs.html}{The Turing Way project}}}}
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Projects are complex, memory is limited}
+\begin{columns}[t]
+ \begin{column}{0.6\textwidth}
+ \begin{itemize}[<+->]
+        \item Files, code, data evolves over time
+        \item[$\hookrightarrow$] Who remember all the changes?
+        \item Keeping track can be hard \& boring!
+        \item Manual methods prove very inefficient
+        \item[$\hookrightarrow$] Your future-self and team members may be lost
+
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.4\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-3>{ \includegraphics[width=0.95\textwidth]{ExempleGentzkow_Library_Bordel2.JPG} \\  }
+       \only<1-3>{ \textcolor{gris}{\tiny{ Source: \href{https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf}{Gentzkow and Shapiro (2014)}}} \\ }
+
+        \only<4-5>{ \includegraphics[width=0.95\textwidth]{AnatomyOfaFile.png} \\  }
+       \only<4-5>{ \textcolor{gris}{\tiny{ Source: \href{https://chazhutton.substack.com/p/making-my-life-harder}{Chaz Hutton}}}}
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Transparency, Accountability \& Reproducibility}
+    \begin{itemize}[<+->]
+        \item Version control provides a detailed history of changes
+        \item Each modification is attributed to a specific user
+        \item Promotes accountability, transparency \&  reproducibility
+    \end{itemize}
+\end{frame}
+
+\section{File evolution}
+
+\begin{frame}{The evolution of a file}
+\begin{center}
+\begin{itemize}
+   \only<1> {\includegraphics[width = 1.0\textwidth]{FileChange1a.png} \\ }
+   \only<2> {\includegraphics[width = 1.0\textwidth]{FileChange2a.png} \\ }
+   \only<3> {\includegraphics[width = 1.0\textwidth]{FileChange3a.png} \\ }
+   \only<4> {\includegraphics[width = 1.0\textwidth]{FileChange4a.png} \\ }
+   \only<5> {\includegraphics[width = 1.0\textwidth]{FileChange5a.png} \\ }
+   \only<6> {\includegraphics[width = 1.0\textwidth]{FileChange6a.png} \\ }
+   \only<7> {\includegraphics[width = 1.0\textwidth]{FileChange7a.png} \\ }
+\end{itemize}
+\end{center}
+\end{frame}
+
+\begin{frame}{The evolution of a file}
+Usual ways to keep track of changes:
+\pause
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{itemize}[<+->]
+        \item New file after each change
+        \item[$\hookrightarrow$] Need to open each file to see the change
+        \item[$\hookrightarrow$] Names have to be explicit
+        \item Only the last file with lots of comments
+        \item Not fulfilling the 3 \textcolor{siap}{\textbf{W}}...
+
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.4\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-4>{ \includegraphics[width=1.0\textwidth]{FileLifeAll.png} \\  }
+        \only<5-6>{ \includegraphics[width=0.95\textwidth]{FileLifeFinalFinal.png} \\  }
+       % \only<7>{ \includegraphics[width=1.0\textwidth]{FileLifeAll.png} \\  }
+       % \only<7>{\hfill \includegraphics[width=0.5\textwidth]{FileLifeFinalFinal.png} \\  }
+
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\section{Version control}
+
+\begin{frame}{The evolution \textcolor{brique}{with Version Control}}
+Record a message (\emph{commit})  for each change!
+\begin{center}
+\begin{itemize}
+   \only<1> {\includegraphics[width = 1.0\textwidth]{FileLife1.png} \\ }
+   \only<2> {\includegraphics[width = 1.0\textwidth]{FileLife2.png} \\ }
+   \only<3> {\includegraphics[width = 1.0\textwidth]{FileLife3.png} \\ }
+   \only<4> {\includegraphics[width = 1.0\textwidth]{FileLife4.png} \\ }
+   \only<5> {\includegraphics[width = 1.0\textwidth]{FileLife5.png} \\ }
+   \only<6> {\includegraphics[width = 1.0\textwidth]{FileLife6.png} \\ }
+   \only<7> {\includegraphics[width = 1.0\textwidth]{FileLife7.png} \\ }
+\end{itemize}
+\end{center}
+\end{frame}
+
+\begin{frame}{The history of the file is recorded!}
+\begin{center}
+\begin{itemize}
+   \only<1-2> {Each version is documented (with \emph{commits}) \\ }
+   \only<1-2> {\includegraphics[width = 1.0\textwidth]{FileLifeHistoryEnd.png} \\ }
+   \only<3-4> {Each version embeds the full history!  }
+   \only<3-4> {\includegraphics[width = 1.0\textwidth]{FileLifeHistoryFull.png} \\ }
+\end{itemize}
+\end{center}
+\end{frame}
+
+\begin{frame}{Going back and "undo" is possible}
+\begin{center}
+\begin{itemize}
+   \only<1-2> {It is possible to review previous version... \\ }
+   \only<1-2> {\includegraphics[width = 1.0\textwidth]{FileLifeBack.png} \\ }
+   \only<3-4> {...to compare the changes...  }
+   \only<3-4> {\includegraphics[width = 1.0\textwidth]{FileLifeDiff.png} \\ }
+   \only<5-6> {... and to revert  to a  previous version... }
+   \only<5-6> {\includegraphics[width = 1.0\textwidth]{FileLifeRevert.png} \\ }
+   \only<7-8> {... or \emph{undo} as if nothing happened }
+   \only<7-8> {\includegraphics[width = 1.0\textwidth]{FileLifeRevert2.png} \\ }
+
+\end{itemize}
+\end{center}
+\end{frame}
+
+\section{Complexity}
+
+\begin{frame}{Good and Bad News}
+Real life is more complex:
+\pause
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{itemize}[<+->]
+        \item[\textbf{+}] Version Control is integrated in RStudio
+        \item[$\hookrightarrow$] Simple operations are easy
+        \item[\textbf{+}] Collaborate on a project
+        \item[$\hookrightarrow$] Track changes of others
+        \item[\textbf{-}] Git is a bit  ``\emph{unfriendly}'' \href{https://git-scm.com/}{\includegraphics[width=0.1\textwidth]{GitLogo.png}}
+        \item[$\hookrightarrow$] Complex situations appear easily
+        \item[\textbf{-}] Git works mostly in command mode
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.4\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-3>{ \includegraphics[width=0.95\textwidth]{Rstudio-git-screenshot.png} \\  }
+        \only<1-3>{\textcolor{gris}{\tiny{\href{https://happygitwithr.com/rstudio-see-git}{"\emph{Happy Git and GitHub for the useR}" (Jennifer Bryan)}}}}
+        \only<4-5>{ \includegraphics[width=0.95\textwidth]{GitCloneSmall.png} \\  }
+        \only<6-7>{ \includegraphics[width=0.6\textwidth]{GitError1.png} \\
+                    \hfill \includegraphics[width=0.6\textwidth]{GitError2.png} \\
+                     \includegraphics[width=0.6\textwidth]{GitError3.png} \\ }
+         \only<8>{ \includegraphics[width=0.9\textwidth]{GitPrompt.png} \\  }
+         \only<8>{ \textcolor{gris}{\tiny{ \href{https://www.c-sharpcorner.com/article/git-for-absolute-beginners-with-command-line-interface/}{Ashish Vishwakarma}}}}
+
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Takeaways}
+Version control system:
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{itemize}[<+->]
+    \item Allows to travel back in time
+    \item Keeps track of all changes
+    \item Allows to "undo" at any point
+    \item Allows reviewing stages of development
+    \item Allow collaborating on projects
+    \item Backups your work
+  \end{itemize}
+ \end{column}
+  \begin{column}{0.4\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-6>{\includegraphics[width=0.8\textwidth]{github-mark.png} }
+        \only<1-6>{ \textcolor{gris}{\tiny{ \href{https://www.c-sharpcorner.com/article/git-for-absolute-beginners-with-command-line-interface/}{GitHub logo}}}}
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Takeaways}
+\pause
+
+\begin{itemize}[<+->]
+    \item Version control is very useful \includegraphics[width=0.05\textwidth]{github-mark.png}
+    \item Version control requires patience, training and experience
+    \item Version control is essential for transparency, and reproducibility of any project
+    \item Installing Git within RStudio can be tedious but worth it!
+    \item There is guidance, tutorials and helping blogs...
+\end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
+
+
+%%%%%%%%%%%%%%% Last Slide %%%%%%%%%%%%%%%%
+
+\begin{frame}[allowframebreaks]%in case more than 1 slide needed
+\frametitle{References}
+    {\footnotesize
+    %\bibliographystyle{authordate1}
+    \bibliographystyle{apalike}
+    \bibliography{c:/Chris/Visualisation/Visu}
+    }
+\end{frame}
+
+
+%\bibliographystyle{authordate1}
+%\bibliography{c:/Chris/Visualisation/Visu}
+%\end{frame}
+
+\begin{frame} % Cover slide
+\frametitle{ }
+\pause
+ \begin{itemize}[<+->]
+  \item[]
+  \item
+\end{itemize}
+\end{frame}
