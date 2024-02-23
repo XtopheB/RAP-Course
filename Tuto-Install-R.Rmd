@@ -45,8 +45,8 @@ Do you need to work through the tutorial? Take the quiz below to find out.
 question("Check all that is TRUE:",
   answer("R is NOT installed on my computer", message = "* Install R"),
   answer("RStudio is NOT installed on my computer", message = "* Install RStudio IDE"),
-  answer("The **tidyverse** package is not installed on my computer", message = "* Install Packages"),
-  answer("I've done them all.", correct = TRUE, message = "You can skip this tutorial! (or still click on *Continue* if you want!)"),
+  answer("The **tidyverse** package is NOT installed on my computer", message = "* Install Packages"),
+  answer("I've done them all.", correct = TRUE, message = "You can skip the next steps and test your R skils directly"),
   type = "multiple",
   incorrect = "Don't worry, this tutorial is here to help!  To get set up follow the tutorial and follow (at least):"
 )

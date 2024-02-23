@@ -1,6 +1,6 @@
 ---
 title: "Learn R - The Basics"
-author: " ---- \n Sinovia Moonie - SIAP \n moonie@un.org \n"
+author: ""
 date: '2023-10-23'
 output:
   learnr::tutorial: 
@@ -311,7 +311,7 @@ paste("My age is", myage)
 question("",
          answer("My age is 45",
                 message = "Well, that would true be if ***MyAge*** and ***myage***  are similar. But since R is case sensitive, these two objects are different"),
-         answer("My age is 25", message = "Well-done! My age is 25 because R is case-sensitive", correct = TRUE),
+         answer("My age is 25", message = "Well-done! \"My age is 25\" because R is case-sensitive", correct = TRUE),
          answer("25",
                 message = "No, We used `paste()` to heave a sentence that assemble the text \"My age is\" and the value"),
          allow_retry = TRUE
