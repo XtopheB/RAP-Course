@@ -5,4 +5,4 @@ Slides and materials for an RAP course
 - Learner package by Garrick Aden-Buie
 ## Rap Slides
 - Also available  (laTeX- Beamer)
-- 
+- Graphics not included (too many)
