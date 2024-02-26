@@ -1,144 +1,55 @@
 ---
 title: "International Merchandise Trade Statistics Highlights"
-author: Christophe Bontemps (SIAP)
+author: "Your name"
 subtitle: '*A simple report*'
+date: "`r Sys.Date()`"
 output:
-  word_document:
-    toc: yes
-  pdf_document:
-    toc: yes
   html_document:
     toc: yes
-    code_folding: show
+    toc_float: true
+    code_folding: hide
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
 ---
 
+# Data analysis
+We provide here some basic elements about the data set and descriptive statistics on some variables of interest.  
 
-
-```{r libraries, include = FALSE}
-# Load the required libraries
-
-# For manipulating data
-library(tidyverse)
-
-# For tables display
-library(flextable)
-
-```
-
-
-```{r setup, include=FALSE}
-# Set echo=FALSE as default for code cells
-# The code folding for HTLM output is thus deactivated
-knitr::opts_chunk$set(echo = FALSE)
-
-```
-
-
-
-# Loading the data
+* First we load the data
+* second we print a summary
 
 ```{r}
-Mydata <- read.csv("Data/TradeData.csv")
+TradeData <- read.csv("https://www.unsiap.or.jp/on_line/2024/RAP/Data/TradeData.csv")
 ```
 
+We loaded the data set and compile the  report on `r Sys.Date()`
 
-# Statistics
-## Main Exports by type over the whole period
-
-### As a table
-
-```{r  }
-# Calculate total value by principle export type
-CommodityByType <- Mydata %>%
-  group_by(Principle_Exports) %>%
-  summarise(total = sum(Stat_Value)) %>%
-  arrange(desc(total))
-
-```
-
-```{r}
-# Table display
-# To reduce the homogenization efforts and the number of functions to be called, 
-# it is recommended to define formatting properties once and for all
-
-set_flextable_defaults(
-  font.size = 10,   table.layout = "autofit")
-
-# Printing the table
-flextable(CommodityByType)
-```
-
- Or as a graphic: 
+## Summary statistics
+Here are some summary statistics of the export value (*Stat_Value* variable), all products combined:
 
 ```{r }
-# Plot the exports
-CommodityByType  %>%
-  ggplot()+
-  aes(x = reorder(Principle_Exports, total), y = (total)) +
-  geom_bar(stat = "identity", 
-             fill= "lightsteelblue1") +
-  labs(title ="Exports from Vanuatu [ 2000-2010] ", 
-       subtitle = "Vanuatu National Statistical Office", 
-       x= "Exports categories",
-       y = "Vatu") +
-  coord_flip() +
-  theme_minimal()
-
+summary(TradeData$Stat_Value)
 ```
 
+The data set contains   **`r  nrow(TradeData)`  observations**, and  **`r  ncol(TradeData)`** variables.
 
-
-```{r EXIT}
-knitr::knit_exit()
-```
-
-
-
-
-##  Selection of the Year
-
-Imagine now the same report but for any year in [2000, 2010]
+Here is a list of all variables available in the data set: 
 
 ```{r}
-MyYear <- 2003
+names(TradeData)
 ```
 
-| we have selected the year **`r MyYear`** let's see the report!
+## Type of exports
 
-
-### As a table
-
-```{r  }
-# Now only for a specific year
-CommodityByType_Year <- Mydata %>%
-  filter(Year == MyYear) %>%
-  group_by(Principle_Exports) %>%
-  summarise(total = sum(Stat_Value)) %>%
-  arrange(desc(total))
-
-```
-
+The variable *Principle_Export* list all the types of goods exported from Vanuatu. There are **`r length(unique(TradeData$Principle_Exports))`** different goods exported. Let's have the list of all these goods. 
 
 ```{r}
-flextable(CommodityByType_Year)
-```
-
-
- Or as a graphic: 
-
-```{r }
-# Plot the exports for the specific year
-CommodityByType_Year  %>%
-  ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +  
-    geom_bar(stat = "identity", color="white", fill= "lightsteelblue1") +
-      labs( x= "Exports categories", 
-            y = "Vatu", 
-            title = paste("Exports from Vanuatu, year = ", MyYear),
-            subtitle = "Vanuatu National Statistical Office") +
-  coord_flip() +
-  theme_minimal()
+unique(TradeData$Principle_Exports)
 
 ```
+
 
 
 
