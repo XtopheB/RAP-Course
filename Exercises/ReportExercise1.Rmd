@@ -1,16 +1,14 @@
 ---
 title: "My title"
-author: "You"
-date: "`r Sys.Date()`"
+author: "Your name"
 output:
+  word_document:
+    toc: no
   html_document:
     toc: no
     code_folding: show
-    toc_float: true
     df_print: paged
   pdf_document:
-    toc: no
-  word_document:
     toc: no
 ---
 
@@ -40,6 +38,7 @@ Here is a list of all variables available in the data set:
 ```{r}
 names(TradeData)
 ```
+
 
 
 The variable *Principle_Export* list all the types of goods exported from Vanuatu. There are **YYYY** different goods exported. Let's have the list of all these goods. 
