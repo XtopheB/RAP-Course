@@ -4,13 +4,13 @@ author: "Christophe Bontemps (SIAP)"
 subtitle: '*A simple report*'
 date: "`r Sys.Date()`"
 output:
+  word_document:
+    toc: yes
   html_document:
     toc: yes
     toc_float: true
     code_folding: hide
   pdf_document:
-    toc: yes
-  word_document:
     toc: yes
 ---
 
@@ -78,7 +78,7 @@ unique(TradeData$Principle_Exports)
 
 ```{r  }
 # Calculate total value by principle export type
-CommodityByType <- TradeData %>%
+ExportsByType <- TradeData %>%
   group_by(Principle_Exports) %>%
   summarise(total = sum(Stat_Value)) %>%
   arrange(desc(total))
@@ -94,20 +94,21 @@ CommodityByType <- TradeData %>%
 #   font.size = 10,   table.layout = "autofit")
 
 # Printing the table
-flextable(CommodityByType)
+flextable(ExportsByType)
 ```
 
 # As a graphic: 
 
 ```{r }
 # Plot the exports
-CommodityByType  %>%
+ExportsByType  %>%
   ggplot()+
   aes(x = reorder(Principle_Exports, total), y = (total)) +
   geom_bar(stat = "identity", 
              fill= "lightsteelblue1") +
   labs(title ="Exports from Vanuatu [ 2000-2010] ", 
-       subtitle = "Vanuatu National Statistical Office", 
+       subtitle = "National Statistical Office", 
+       caption  = paste("Date: ",Sys.Date()), 
        x= "Exports categories",
        y = "Vatu") +
   coord_flip() +
@@ -115,7 +116,7 @@ CommodityByType  %>%
 
 ```
 
-
+# Some extensions (not required in the project )
 
 ##  Selection of the Year
 
@@ -132,7 +133,7 @@ MyYear <- 2003
 
 ```{r  }
 # Now only for a specific year
-CommodityByType_Year <- TradeData %>%
+ExportsByType_Year <- TradeData %>%
   filter(Year == MyYear) %>%
   group_by(Principle_Exports) %>%
   summarise(total = sum(Stat_Value)) %>%
@@ -142,7 +143,7 @@ CommodityByType_Year <- TradeData %>%
 
 
 ```{r}
-flextable(CommodityByType_Year)
+flextable(ExportsByType_Year)
 ```
 
 
@@ -150,7 +151,7 @@ flextable(CommodityByType_Year)
 
 ```{r }
 # Plot the exports for the specific year
-CommodityByType_Year  %>%
+ExportsByType_Year  %>%
   ggplot(aes(x = reorder(Principle_Exports, total), y = (total))) +  
     geom_bar(stat = "identity", color="white", fill= "lightsteelblue1") +
       labs( x= "Exports categories", 
