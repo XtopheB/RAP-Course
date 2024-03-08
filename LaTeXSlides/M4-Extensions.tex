@@ -93,7 +93,7 @@
 
 
 \title[\textcolor{siap}{Principles of RAP}]{\textcolor{siap}{Principles of \\ Reproducible Analytical Pipelines \\}
-\vspace{0.55cm} \textcolor{brique}{Git and GitHub}}
+\vspace{0.55cm} \textcolor{brique}{What's next?}}
 \author{Christophe Bontemps}
 \institute{\large{\emph{Statistical Institute for Asia and the Pacific} } \\
     \includegraphics[height=10ex]{SIAP_logo_2020_1800.png}}
@@ -107,38 +107,210 @@
 \end{frame}
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AI %%%%%%
-
-\section{Version Control}
+\section{Full Reproducibility}
 
 \begin{frame}
-\frametitle{Towards a full RAP}
+\frametitle{Towards \emph{full} reproducibility }
+There are many other things to control for \emph{full} reproducibility:
 \begin{columns}[t]
  \begin{column}{0.8\textwidth}
-
  \begin{itemize}[<+->]
-        \item In short,\\
-         \begin{center} \textbf{RAP}\\ =\\ Reproducible documents\\+ \\ Version Control \end{center}
-        \item New tools, new challenges, new problems...
-        \item[$\hookrightarrow$]  Requires time, patience and training
-        \item Git is powerful, but complex and...
-        \item[]\hfill ... unfriendly!!
-        \item[$\hookrightarrow$] How it works
-        \item[$\hookrightarrow$] How it works with \includegraphics[width=6ex]{GitHub-logo.png} \&  \includegraphics[width=2.5ex]{RStudio_logo.png}
+        \item  Code execution may return $\neq$ results 
+        \item[$\hookrightarrow$] Control  coding environment 
+        \item $R$ is an evolving language
+        \item[$\hookrightarrow$] Control R environment \& dependencies
+        \item The computing environment may change
+        \item[$\hookrightarrow$] Control computing environement
+        \begin{center}
+            \textcolor{siap}{ There are tools for controlling that!}
+        \end{center}
     \end{itemize}
  \end{column}
   \begin{column}{0.2\textwidth}
     \begin{center}
     \begin{itemize}
-        \only<4-7>{\vspace{2 cm}  \includegraphics[width=0.8\textwidth]{git_logo.jpg} \\  }
-        %\only<4-5>{ \includegraphics[width=0.95\textwidth]{GitHub-logo.png} \\  }
-
+        \only<1-7>{  \includegraphics[width=0.8\textwidth]{RStudio_logo.png} \\  }
     \end{itemize}
     \end{center}
   \end{column}
 \end{columns}
 \end{frame}
+
+\subsection{Reproducible code}
+
+\begin{frame}
+\frametitle{Reproducible code}
+\begin{columns}[t]
+ \begin{column}{0.8\textwidth}
+ \begin{itemize}[<+->]
+        \item Code is versionned with Git/GitHub
+        \item[$\hookrightarrow$] Not enough for full reproducibility
+        \item Some analysis use random number generators
+        \item[$\hookrightarrow$] \emph{Seeds} are machine, OS \& R version dependent \\
+        \item Most analysis use versionned packages
+        \item[$\hookrightarrow$] Important changes, dependencies, $\cdots$ 
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.2\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-7>{  \includegraphics[width=0.8\textwidth]{git_logo.jpg} \\  }
+        \only<3-7>{\vspace{0.5cm} \includegraphics[width=1.0\textwidth]{seed.png} \\  }
+        \only<5-7>{ \vspace{0.5cm} \includegraphics[width=0.9\textwidth]{package-images.png} \\  }
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+\subsection{Reproducible environment}
+
+
+\begin{frame}
+\frametitle{Controlling the environment}
+\begin{columns}[t]
+ \begin{column}{0.8\textwidth}
+ \begin{itemize}[<+->]
+        \item Create a package
+        \item[$\hookrightarrow$] Embed functions and data ($usethis$)
+        \item Control ("isolate") packages used 
+        \item[$\hookrightarrow$] Save R environment ($renv$)
+        \item The whole environment can be "containerized" 
+        \item[$\hookrightarrow$] Virtualization of work in containers ($docker$)
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.2\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-7>{  \includegraphics[width=0.7\textwidth]{usethis-logo.png} \\  }
+        \only<4-7>{ \includegraphics[width=0.8\textwidth]{renv-logo.png} \\  }
+        \only<6-7>{ \includegraphics[width=0.95\textwidth]{docker-logo.png} \\  }
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+\section{Other tools}
+
+\begin{frame}
+\frametitle{Other software}
+RAP using other computing/automation environments
+\pause
+\begin{columns}[t]
+ \begin{column}{0.8\textwidth}
+ \begin{itemize}[<+->]
+        \item Python is another option
+        \item[$\hookrightarrow$] Jupyter notebook use markdown
+        \item[$\hookrightarrow$] \emph{Chunks} in  Julia, Python, R \& others 
+        \item Quarto is RStudio new notebook format
+        \item[$\hookrightarrow$]\emph{Chunks} in R, Julia, Python \& Observable
+        \item[$\hookrightarrow$] Highly interactive 
+        \item Also other statistical software (\emph{e.g.} Stata)
+        \item[$\hookrightarrow$] Less integrated, bespoke automation ($make$)
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.2\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<1-8>{  \includegraphics[width=0.6\textwidth]{Python-logo.png} \\  }
+        \only<2-8>{ \includegraphics[width=0.6\textwidth]{Jupyter_logo.png} \\  }
+        \only<4-8>{ \includegraphics[width=0.95\textwidth]{quarto-logo.png} \\  }
+        \only<7-8>{ \includegraphics[width=0.95\textwidth]{stata-logo.png} \\  }
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\section{Automation}
+
+\begin{frame}
+\frametitle{About automation}
+Automation is a real challenge
+\pause
+ \begin{itemize}[<+->]
+        \item Raw data have errors 
+        \item[$\hookrightarrow$] Some errors are generic: \\
+        Missings, units, dates, format,... 
+        \item[$\hookrightarrow$] Some are specific: \\
+        Names, geospatial, new classification, ...   
+        \item Manual treatment (\& visualization) is sometimes needed
+        \item[$\hookrightarrow$] Split automatic tasks from manual ones
+        \item[$\hookrightarrow$] Use specific errors to inform generic tests/treatments 
+        \item[]
+        \begin{center}
+          \textcolor{siap}{RAP is built with user(s) experience(s)}
+        \end{center}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{About the workflow}
+The main difficulty is to characterize the processes \& workflow
+\pause
+\begin{columns}[t]
+ \begin{column}{0.7\textwidth}
+ \begin{itemize}[<+->]
+        \item A clear process is helpful
+        \item[$\hookrightarrow$] Start simple 
+        \item[$\hookrightarrow$] Build several "\emph{small}" 
+        \includegraphics[width=0.15\textwidth]{BuildingBlock_rap.png}s
+        \item Document the workflow
+        \item[$\hookrightarrow$] Have a precise map 
+        \item Test separately every steps
+        \item[$\hookrightarrow$] Write input/output specification \\
+        \emph{(just like for any function)}
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.3\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<4-9>{  \includegraphics[width=0.7\textwidth]{Data-analysis-pipeline.png} \\  }
+        \only<4-9>{ \textcolor{gris}{\tiny{ Source: \href{https://www.researchgate.net/figure/Data-analysis-pipeline-described-in-three-steps-with-depiction-of-quality-control-badge_fig4_369414703}{ResearchGate}}}}
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}
+\frametitle{Takeaways}
+Building a RAP takes time, energy and skills
+\pause
+\begin{columns}[t]
+ \begin{column}{0.8\textwidth}
+ \begin{itemize}[<+->]
+        \item Tools for reproducibility are available
+        \item[$\hookrightarrow$] R and Git/GitHub are useful
+        \item Automating is never easy
+        \item[$\hookrightarrow$] Modular \& functional coding
+        \item Building a RAP is a collective process
+        \item[$\hookrightarrow$] Sharing tools, processes \& feedback \\
+        \includegraphics[width=0.5\textwidth]{DecolonisingKnowledge.jpg}
+    \end{itemize}
+ \end{column}
+  \begin{column}{0.2\textwidth}
+    \begin{center}
+    \begin{itemize}
+        \only<2-8>{  \includegraphics[width=0.4\textwidth]{RStudio_logo.png} \\  }
+        \only<2-8>{ \vspace{0.2cm} \hfill \includegraphics[width=0.4\textwidth]{git_logo.jpg} \\  }
+        \only<2-8>{ \vspace{0.2cm} \includegraphics[width=0.4\textwidth]{github-mark.png} \\  }
+        \only<5-8>{ \vspace{0.2cm} \includegraphics[width=0.8\textwidth]{BuildingBlock_rap.png} \\ }
+ 
+    \end{itemize}
+    \end{center}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+\end{document}
 
 \begin{frame}
 \frametitle{Git  \& GitHub}
