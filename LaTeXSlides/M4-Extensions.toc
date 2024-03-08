@@ -1,0 +1,6 @@
+\beamer@sectionintoc {1}{Full Reproducibility}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Reproducible code}{9}{0}{1}
+\beamer@subsectionintoc {1}{2}{Reproducible environment}{16}{0}{1}
+\beamer@sectionintoc {2}{Other tools}{23}{0}{2}
+\beamer@sectionintoc {3}{Automation}{32}{0}{3}
+\beamer@sectionintoc {4}{Conclusion}{49}{0}{4}
