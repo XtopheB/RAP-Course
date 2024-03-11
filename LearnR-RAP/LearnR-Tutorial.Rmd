@@ -1,7 +1,7 @@
 ---
 title: "Learn R: \n A tutorial"
-author: " ---- \n Christophe Bontemps  \n ![](www/SIAP_logo_2020_1800.png){width=30%}  "
-date: '2023-11-02'
+author: " ---- \n *Christophe Bontemps*  \n ![](www/SIAP_logo_2020_1800.png){width=30%}  "
+date: '2024-04-01'
 output:
   learnr::tutorial: 
     progressive: true
@@ -509,10 +509,30 @@ mynewdata[1,3]
 ##  Importing data into R
 
 Before we can begin any analysis, we need to first read or import that data set into R.  
-R allows the import of data of various types, from data stored in commonly used formats such as comma-separated values (CSV) or MS Excel (xls) to those stored in commercial statistical packages such as SPSS, STATA or SAS.  
-In this tutorial, we will explore how to import a data set in STATA file format, which carries the file extension *.dta*. 
+R allows the import of data of various types, from data stored in commonly used formats such as comma-separated values (CSV) or MS Excel (xls/xlsx) to those stored in commercial statistical packages such as SPSS, STATA or SAS. 
 
-To read a STATA data file into R, we use the command `read.dta( )` function.  To use this function, we need to load the “*haven*” package presented earlier.  This package has the relevant tools and functions to import data from commercial software.  
+### Importing MS Excel files 
+
+It is really easy to import files in R. As usual, we will just need to use the right package for that. We use here the package "**readxl**", even if some other exists.  As any package, you'll need to install it before loading using the `install.packages()` function.
+
+The function `read_excel( )` accepts several arguments, such as the sheet to read in the excel file, or whether or not to use the column names, but the most important argument is the **path** to the xls/xlsx file, as below:  
+
+```{r eval=FALSE}
+# loading the readxl package
+library(readxl)
+# loading the data
+Mydataset <- read_excel(path ="Myexcel.xls")
+
+```
+
+The lines of code above first load the package *readxl* using the `library()` function.  The second line, creates a data frame called *Mydataset* that stores the data from the excel data file called “*Myexcel.xls*”.  Remember that a data frame is a data structure in R that stores spread-sheet like data, as rows (observations or cases) and columns (variables). 
+
+
+### Importing Stata files 
+
+We will explore now how to import a data set in STATA file format, which carries the file extension *.dta*. 
+
+To read a STATA data file into R, we use the command `read.dta( )` function.  To use this function, we need to load the “**haven**” package presented earlier.  This package has the relevant tools and functions to import data from commercial software.  
 
 The function `read.dta( )` accepts only one argument, which is the full name or file path, including the file extension as shown below. 
 
@@ -520,14 +540,24 @@ The function `read.dta( )` accepts only one argument, which is the full name or 
 # loading the  haven package
 library(haven)
 # loading the data
-mytest <- read.dta("testdata.dta")
+Mytest <- read.dta("testdata.dta")
 
 ```
 
-The lines of code above first load the package *haven* using the `library()` function.  The second line, creates a data frame called `mytest` that stores the data from the data file called “*testdata.dta*”.  Remember that a data frame is a data structure in R that stores spread-sheet like data, as rows (observations or cases) and columns (variables). 
+The lines of code above first load the package *haven* using the `library()` function.  The second line, creates a data frame called *Mytest* that stores the data from the data file called “*testdata.dta*”. 
 
+### Importing any file with RStudio
 
+It is also possible to use the RStudio *environment* interface to load any data set. 
+![](https://uedufy.com/wp-content/uploads/2023/05/image-30-768x377.png)
 
+Then select the format of your file using the drop down menu. 
+
+![](https://uedufy.com/wp-content/uploads/2023/05/Screenshot-2023-05-28-at-11.36.48-768x219.png)
+ You can also configure options such as the sheet to open in excel, as shown [in this tutorial](https://uedufy.com/how-to-import-an-excel-file-into-r-6-easy-steps/) (from Leonard at Uedufy.com). 
+ 
+ > **NB**: The code resulting form this operation will be copied in your document after the importation for reproducibility. 
+ 
 
 ## Data exploration
 
