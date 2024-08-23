@@ -554,7 +554,9 @@ It is also possible to use the RStudio *environment* interface to load any data 
 Then select the format of your file using the drop down menu. 
 
 ![](https://uedufy.com/wp-content/uploads/2023/05/Screenshot-2023-05-28-at-11.36.48-768x219.png)
- You can also configure options such as the sheet to open in excel, as shown [in this tutorial](https://uedufy.com/how-to-import-an-excel-file-into-r-6-easy-steps/) (from Leonard at Uedufy.com). 
+
+
+You can also configure options such as the sheet to open in excel, as shown [in this tutorial](https://uedufy.com/how-to-import-an-excel-file-into-r-6-easy-steps/) (from Leonard at Uedufy.com). 
  
  > **NB**: The code resulting form this operation will be copied in your document after the importation for reproducibility. 
  
