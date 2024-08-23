@@ -1,7 +1,7 @@
 ---
 title: "Learn R: \n A tutorial"
 author: " ---- \n *Christophe Bontemps*  \n ![](www/SIAP_logo_2020_1800.png){width=30%}  "
-date: '2024-04-01'
+date: '2024-08-21'
 output:
   learnr::tutorial: 
     progressive: true
@@ -379,7 +379,7 @@ question("",
 
 ### Data Frames
 
-A data frame is the equivalent of a tabular, where we store data in rows and columns. We will use these structures a lot, and as any object in R, we can access to its different component with different methods
+A data frame is the equivalent of a tabular, *i.e.* a 2-dimensional, rectangular, data structure, which stores data in rows and columns. We will use these structures a lot, and as any object in R, we can access to its different component with different methods
 
 > Let's create data frames and play with them!
 
@@ -539,12 +539,31 @@ The function `read.dta( )` accepts only one argument, which is the full name or 
 ```{r eval=FALSE}
 # loading the  haven package
 library(haven)
-# loading the data
+# loading the data from STATA file format
 Mytest <- read.dta("testdata.dta")
 
 ```
 
 The lines of code above first load the package *haven* using the `library()` function.  The second line, creates a data frame called *Mytest* that stores the data from the data file called “*testdata.dta*”. 
+
+
+### Importing SPSS data into R
+
+We will now see how to import a data set in SPSS file format that carries the file extension *.sav*.  To import or read files of that format into R, we need the R package called **foreign**. Like the **haven** package, the **foreign** package contains a range of functions that will allow you to import data files from some of the other statistical software packages aside from SPSS such as Stata and SAS into R. If you have not yet installed the foreign package, use the command `install.packages(“foreign” )`.  
+
+We are now ready to read SPSS data into R.  To do this, we use the `read.spss( )` function. This function accepts several arguments. The first argument, *file is the name of the data file. The second argument  *to.data.frame* tells R to convert the data set into a data frame. We should assign a name to the data frame that will be created when the data set has been imported into R. 
+
+```{r eval=FALSE}
+# loading the foreign package
+library(foreign)
+# loading the data drom SPSS file
+MyTest2 <- read.spss(file ="testdata.sav", to.data.frame=TRUE) 
+
+```
+
+The lines of code above first load the package *foreign* using the `library()` function. 
+The second line creates a new data frame called *MyTest2* that stores the data from the SPSS data file called "*testdata.sav*".  
+
 
 ### Importing any file with RStudio
 
@@ -575,7 +594,7 @@ First, let us see what are the variables using the `names()` function.
 names(SDG)
 ```
 
-Now, can you display the first 5 lines of the data set (maybe using using the  `head()` function) ?
+Now, can you display the first 5 lines of the data set (maybe using using the `head()` function) ?
 
 
 ```{r filter2, exercise = TRUE, exercise.eval = FALSE}
@@ -595,7 +614,7 @@ head(SDG, n=5)
 
 
 ### Playing with `tidyverse` 
- There are many functions available in this *meta* package `tidyverse`, in particular, one has many tools for filtering and visualizing the data. 
+There are many functions available in this package `tidyverse`, in particular, one has many tools for filtering and visualizing the data. 
  
  First, let's examine the `pipe` operator that links operations:  `%>% `. 
  
